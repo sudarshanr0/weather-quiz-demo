@@ -199,9 +199,24 @@ async function hostLogin(){
   }
   hostAccess = true;
   mode = 'host';
-  if(gamePin && cfgReady){
-    state = await loadState();
+
+  if(!cfgReady){
+    syncUrl();
+    render();
+    return;
   }
+
+  if(!gamePin){
+    await createGame();
+    return;
+  }
+
+  state = await loadState();
+  if(!state){
+    await createGame();
+    return;
+  }
+
   syncUrl();
   attachListener();
   render();
@@ -374,7 +389,8 @@ function playerView(){
   if(!cfgReady) return configCard();
   if(!gamePin){
     return `<div class="card"><h2>Join as Player</h2><div class="body">
-      <div class="small">Scan the QR code shown on the host screen to join instantly. The link includes the game PIN automatically.</div>
+      <div class="small">Scan this QR code from the host screen to join instantly (no GAME PIN typing needed).</div>
+      <div style="margin-top:12px" class="small">If you don't see a QR yet, ask the host to login and create a game first.</div>
     </div></div>`;
   }
   if(!state) return `<div class="card"><h2>Join Game</h2><div class="body"><div class="small">Loading game…</div></div></div>`;
