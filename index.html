@@ -188,7 +188,7 @@ function syncUrl(){
   history.replaceState(null,'',u);
 }
 function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
-function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); return u.toString(); }
+function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); u.searchParams.delete('hk'); return u.toString(); }
 function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
 
 async function hostLogin(){
@@ -233,8 +233,12 @@ function attachListener(){
 
 async function createGame(){
   gamePin = makePin();
+  hostAccess = true;
+  hostKey = makeHostKey();
+  localStorage.setItem(hostStorageKey(gamePin), hostKey);
   state = {
     pin: gamePin,
+    hostKey,
     title: 'Solo Quiz',
     status: 'lobby',
     current: 0,
