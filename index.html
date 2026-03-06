@@ -152,29 +152,27 @@ if (cfgReady) {
   db = getFirestore(app);
 }
 
-const HOST_PASSWORD = 'ZUIQCAOS';
+const HOST_PASSWORD = 'ZIUQCAOS';
 const userId = localStorage.userId || (localStorage.userId = 'u' + Math.random().toString(36).slice(2));
 const url = new URL(location);
-const requestedMode = url.searchParams.get('mode') || 'player';
-const hostKeyFromUrl = url.searchParams.get('hk') || '';
-let mode = requestedMode === 'host' ? 'host' : 'player';
+const requestedMode = url.searchParams.get('mode') || 'home';
+let mode = ['home','host','player'].includes(requestedMode) ? requestedMode : 'home';
 let gamePin = url.searchParams.get('pin') || '';
 let state = null;
 let unsub = null;
 let hostAccess = false;
-let hostKey = hostKeyFromUrl;
 
-function hostStorageKey(pin){ return `hostKey_${pin}`; }
-function makeHostKey(){ return Math.random().toString(36).slice(2,12).toUpperCase(); }
 function refreshModeControls(){
   const el = document.getElementById('modeControls');
   if(!el) return;
-  el.innerHTML = hostAccess
-    ? `<button class="light" onclick="setMode('host')">Host</button><button class="light" onclick="setMode('player')">Player</button>`
-    : `<button class="light" onclick="hostLogin()">Host Login</button><button class="light" onclick="setMode('player')">Player</button>`;
+  if(mode==='home'){
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = `<button class="light" onclick="setMode('home')">Home</button>`;
 }
 function setMode(m){
-  if(m==='host' && !hostAccess){
+  if(m==='host'){
     hostLogin();
     return;
   }
@@ -185,15 +183,13 @@ function setMode(m){
 }
 function syncUrl(){
   const u=new URL(location);
-  u.searchParams.set('mode', hostAccess && mode==='host' ? 'host' : 'player');
+  u.searchParams.set('mode', mode);
   if(gamePin) u.searchParams.set('pin',gamePin); else u.searchParams.delete('pin');
-  if(hostAccess && gamePin && hostKey) u.searchParams.set('hk', hostKey); else u.searchParams.delete('hk');
   history.replaceState(null,'',u);
 }
 function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
 function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); u.searchParams.delete('hk'); return u.toString(); }
 function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
-
 
 async function hostLogin(){
   const password = prompt('Enter host password');
@@ -201,30 +197,13 @@ async function hostLogin(){
     if(password !== null) alert('Invalid host password.');
     return;
   }
-  if(!gamePin){
-    mode = 'host';
-    hostAccess = true;
-    syncUrl();
-    render();
-    return;
-  }
-  const loaded = await loadState();
-  if(!loaded){
-    alert('Game not found for this PIN.');
-    return;
-  }
-  hostKey = loaded.hostKey || makeHostKey();
-  if(!loaded.hostKey){
-    loaded.hostKey = hostKey;
-    state = loaded;
-    await saveState();
-  }
   hostAccess = true;
-  localStorage.setItem(hostStorageKey(gamePin), hostKey);
   mode = 'host';
+  if(gamePin && cfgReady){
+    state = await loadState();
+  }
   syncUrl();
   attachListener();
-  state = loaded;
   render();
 }
 
@@ -343,8 +322,26 @@ function configCard(){
     </div>
   </div>`;
 }
+
+function homeView(){
+  return `
+  <div class="card">
+    <h2>Welcome</h2>
+    <div class="body">
+      <p class="small">Choose how you want to use the quiz.</p>
+      <div class="actions">
+        <button class="dark" onclick="setMode('host')">Host</button>
+        <button class="light" onclick="setMode('player')">Player</button>
+      </div>
+      <hr>
+      <div class="small">Players can join by scanning the host QR code — no need to type a game PIN manually.</div>
+    </div>
+  </div>`;
+}
+
 function hostView(){
   if(!cfgReady) return configCard();
+  if(!hostAccess) return `<div class="card"><h2>Host Login</h2><div class="body"><button class="dark" onclick="hostLogin()">Login as Host</button></div></div>`;
   if(!state) return `<div class="card"><h2>Host</h2><div class="body"><button class="dark" onclick="createGame()">Create Game</button></div></div>`;
   const q = QUESTIONS[state.current];
   return `
@@ -376,10 +373,8 @@ function hostView(){
 function playerView(){
   if(!cfgReady) return configCard();
   if(!gamePin){
-    return `<div class="card"><h2>Join Game</h2><div class="body">
-      <input id="pin" placeholder="Enter GAME PIN">
-      <input id="name" placeholder="Your name" style="margin-top:10px">
-      <button class="dark" style="margin-top:10px" onclick="joinGame()">Join</button>
+    return `<div class="card"><h2>Join as Player</h2><div class="body">
+      <div class="small">Scan the QR code shown on the host screen to join instantly. The link includes the game PIN automatically.</div>
     </div></div>`;
   }
   if(!state) return `<div class="card"><h2>Join Game</h2><div class="body"><div class="small">Loading game…</div></div></div>`;
@@ -420,46 +415,23 @@ function scoreboard(){
     </div>
   </div>`;
 }
-async function joinGame(){
-  const pin = document.getElementById('pin').value.trim();
-  const name = document.getElementById('name').value.trim() || 'Player';
-  gamePin = pin;
-  syncUrl();
-  attachListener();
-  state = await loadState();
-  if(!state){ alert('Game not found. Check the GAME PIN.'); return; }
-  await addPlayer(name);
-}
 function render(){
   refreshModeControls();
   document.getElementById('app').innerHTML = `
   <div class="grid">
-    <div>${mode==='host' ? hostView() : playerView()}</div>
-    <div>${scoreboard()}</div>
+    <div>${mode==='home' ? homeView() : (mode==='host' ? hostView() : playerView())}</div>
+    <div>${mode==='home' ? '' : scoreboard()}</div>
   </div>`;
 }
 async function init(){
-  if(gamePin){
-    const storedHostKey = localStorage.getItem(hostStorageKey(gamePin)) || '';
-    if(hostKeyFromUrl && hostKeyFromUrl===storedHostKey){
-      hostAccess = true;
-      hostKey = hostKeyFromUrl;
-    }
+  if(mode==='host'){
+    mode = 'home';
   }
   syncUrl();
   attachListener();
   if(gamePin && cfgReady){
     state = await loadState();
-    if(state && (hostKey === state.hostKey || localStorage.getItem(hostStorageKey(gamePin))===state.hostKey)){
-      hostAccess = true;
-      hostKey = state.hostKey;
-      localStorage.setItem(hostStorageKey(gamePin), hostKey);
-    }
   }
-  if(mode==='host' && !hostAccess){
-    mode='player';
-  }
-  syncUrl();
   render();
 }
 init();
@@ -470,7 +442,6 @@ window.startGame=startGame;
 window.nextQuestion=nextQuestion;
 window.addPlayer=addPlayer;
 window.answerQuestion=answerQuestion;
-window.joinGame=joinGame;
 </script>
 </body>
 </html>
