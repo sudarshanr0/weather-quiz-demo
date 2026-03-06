@@ -37,6 +37,10 @@ hr{border:none;border-top:1px solid rgba(148,163,184,.2);margin:18px 0}
 .qr{width:180px;height:180px;border:1px solid rgba(148,163,184,.45);border-radius:12px;background:#fff;padding:4px}
 .join-link{max-width:430px;word-break:break-all;padding:10px;border-radius:12px;background:rgba(15,23,42,.5);border:1px dashed rgba(148,163,184,.45)}
 .actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.qbank{margin-top:16px;max-height:220px;overflow:auto;border:1px solid rgba(148,163,184,.25);border-radius:12px;padding:10px;background:rgba(15,23,42,.35)}
+.qbank button{width:100%;text-align:left;margin:6px 0;padding:10px;background:rgba(15,23,42,.5);border:1px solid rgba(148,163,184,.3);color:#e2e8f0}
+.qtools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.qtools select{min-width:220px;padding:10px;border-radius:10px;border:1px solid rgba(148,163,184,.4);background:rgba(15,23,42,.6);color:#e2e8f0}
 </style>
 </head>
 <body>
@@ -190,6 +194,38 @@ function syncUrl(){
 function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
 function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); u.searchParams.delete('hk'); return u.toString(); }
 function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
+function qrFallback(pin){ return 'https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl='+encodeURIComponent(joinLink(pin)); }
+
+async function hostLogin(){
+  const password = prompt('Enter host password');
+  if(password !== HOST_PASSWORD){
+    if(password !== null) alert('Invalid host password.');
+    return;
+  }
+  hostAccess = true;
+  mode = 'host';
+
+  if(!cfgReady){
+    syncUrl();
+    render();
+    return;
+  }
+
+  if(!gamePin){
+    await createGame();
+    return;
+  }
+
+  state = await loadState();
+  if(!state){
+    await createGame();
+    return;
+  }
+
+  syncUrl();
+  attachListener();
+  render();
+}
 
 async function hostLogin(){
   const password = prompt('Enter host password');
@@ -284,6 +320,16 @@ async function nextQuestion(){
     await saveState();
   }
 }
+
+async function goToQuestion(idx){
+  if(!state) return;
+  const qIndex = Math.max(0, Math.min(QUESTIONS.length - 1, Number(idx) || 0));
+  state.current = qIndex;
+  state.status = 'live';
+  state.questionStart = Date.now();
+  state.answered = {};
+  await saveState();
+}
 async function addPlayer(name){
   if(!name) name = 'Player';
   const players = state.players || {};
@@ -365,7 +411,7 @@ function hostView(){
     <div class="body">
       <div class="badge">GAME PIN: ${gamePin}</div>
       <div class="hero-line">
-        <img src="${qr(gamePin)}" class="qr">
+        <img src="${qr(gamePin)}" class="qr" onerror="this.onerror=null;this.src='${qrFallback(gamePin)}'">
         <div>
           <div class="small">Players join via QR or link</div>
           <div class="join-link">${joinLink(gamePin)}</div>
@@ -382,6 +428,16 @@ function hostView(){
       <h3>${q.question}</h3>
       <ol type="A">${q.options.map(o => `<li>${o}</li>`).join('')}</ol>
       <div class="small">Correct: ${'ABCD'[q.answerIndex]}. ${q.options[q.answerIndex]}</div>
+
+      <div class="qtools">
+        <select id="hostQuestionSelect">
+          ${QUESTIONS.map((item, i)=>`<option value="${i}" ${i===state.current?'selected':''}>Q${i+1}: ${item.question}</option>`).join('')}
+        </select>
+        <button class="light" onclick="goToQuestion(document.getElementById('hostQuestionSelect').value)">Show Selected Question</button>
+      </div>
+      <div class="qbank">
+        ${QUESTIONS.map((item, i)=>`<button onclick="goToQuestion(${i})">${i+1}. ${item.question}</button>`).join('')}
+      </div>
     </div>
   </div>`;
 }
@@ -456,6 +512,7 @@ window.setMode=setMode;
 window.createGame=createGame;
 window.startGame=startGame;
 window.nextQuestion=nextQuestion;
+window.goToQuestion=goToQuestion;
 window.addPlayer=addPlayer;
 window.answerQuestion=answerQuestion;
 </script>
