@@ -1,775 +1,379 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Weather & Climate Quiz (Demo)</title>
-  <style>
-    :root { color-scheme: light; }
-    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background:#fafafa; color:#111; }
-    header { position: sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(255,255,255,.85); border-bottom:1px solid #e6e6e6; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
-    .row { display:flex; gap:12px; align-items:center; justify-content:space-between; }
-    .brand { font-weight:800; font-size:18px; }
-    .sub { font-size:12px; color:#666; margin-top:2px; }
-    .tabs { display:flex; gap:8px; }
-    .tab { border:0; padding:10px 12px; border-radius:14px; font-weight:700; cursor:pointer; background:#f1f1f1; }
-    .tab.active { background:#111; color:#fff; }
-    main { padding: 18px 0 50px; }
-    .grid { display:grid; grid-template-columns: 1.7fr 1fr; gap: 16px; }
-    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
-    .card { background:#fff; border:1px solid #e6e6e6; border-radius:24px; box-shadow: 0 1px 6px rgba(0,0,0,.04); overflow:hidden; }
-    .cardH { padding:16px 16px 12px; border-bottom:1px solid #f0f0f0; display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
-    .cardT { font-weight:800; }
-    .cardS { color:#666; font-size:13px; margin-top:4px; }
-    .cardB { padding:16px; }
-    input, textarea { width:100%; border:1px solid #e6e6e6; border-radius:16px; padding:10px 12px; font-size:14px; outline:none; }
-    input:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(17,17,17,.06); border-color:#d8d8d8; }
-    textarea { min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; background:#fafafa; }
-    .btn { border:0; cursor:pointer; border-radius:18px; padding:12px 14px; font-weight:800; font-size:14px; }
-    .btn.dark { background:#111; color:#fff; }
-    .btn.gray { background:#f1f1f1; color:#111; }
-    .btn.green { background:#059669; color:#fff; }
-    .btn.red { background:#dc2626; color:#fff; }
-    .btn:disabled { opacity:.55; cursor:not-allowed; }
-    .muted { color:#666; font-size:12px; }
-    .pill { background:#f1f1f1; border-radius:14px; padding:8px 10px; font-weight:800; font-size:12px; }
-    .two { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
-    .qrbox { display:flex; gap:12px; align-items:center; }
-    .qrimg { width:160px; height:160px; border-radius:18px; border:1px solid #e6e6e6; background:#fff; box-shadow: 0 1px 6px rgba(0,0,0,.04); }
-    .linkbox { background:#fafafa; border:1px solid #eee; border-radius:16px; padding:10px; font-size:12px; word-break: break-all; }
-    .alert { border-radius:18px; padding:10px 12px; font-size:13px; border:1px solid; margin-bottom: 12px; }
-    .alert.warn { background:#fffbeb; border-color:#f59e0b66; color:#7a4b00; }
-    .alert.err { background:#fef2f2; border-color:#ef444466; color:#7f1d1d; }
-    .qtitle { font-weight:900; font-size:18px; line-height:1.2; }
-    .opt { width:100%; text-align:left; border:1px solid #e6e6e6; background:#fff; padding:12px; border-radius:18px; cursor:pointer; font-weight:800; display:flex; gap:10px; align-items:flex-start; }
-    .opt:hover { background:#fafafa; }
-    .opt.disabled { opacity:.6; cursor:not-allowed; }
-    .opt.chosen { background:#111; color:#fff; border-color:#111; }
-    .badge { width:24px; height:24px; border-radius:999px; border:1px solid rgba(255,255,255,.6); display:flex; align-items:center; justify-content:center; font-size:12px; }
-    .badge.light { border-color:#d0d0d0; }
-    table { width:100%; border-collapse: collapse; }
-    th, td { padding:10px; border-bottom:1px solid #eee; font-size:13px; }
-    th { text-align:left; font-size:12px; color:#666; background:#fafafa; }
-    td.r { text-align:right; }
-    .top3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-bottom:10px; }
-    @media (max-width: 480px) { .top3 { grid-template-columns: 1fr; } }
-    .mini { border:1px solid #e6e6e6; border-radius:18px; padding:10px; }
-    .mini .rank { font-size:12px; color:#666; }
-    .mini .nm { font-weight:900; margin-top:4px; }
-    .mini .sc { font-size:12px; color:#666; margin-top:2px; }
-    footer { margin-top: 18px; color:#777; font-size:12px; }
-    .smallrow { display:flex; gap:10px; flex-wrap:wrap; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solo Quiz Live Game (Firebase)</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111}
+header{padding:16px 24px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+main{max-width:1200px;margin:0 auto;padding:20px}
+.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card h2{margin:0;padding:18px 18px 8px;font-size:20px}
+.body{padding:18px}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+.dark{background:#111;color:#fff}.light{background:#eef2ff}.green{background:#166534;color:#fff}
+input, textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px;box-sizing:border-box}
+.opts button{display:block;width:100%;text-align:left;margin:10px 0;background:#f8fafc;border:1px solid #e5e7eb}
+.small{color:#6b7280;font-size:13px}
+.score td,.score th{padding:8px 10px;border-bottom:1px solid #eee}.score{width:100%;border-collapse:collapse}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;font-size:12px;font-weight:700}
+.timer{font-size:34px;font-weight:800}
+.correct{color:#15803d}.muted{color:#6b7280}.wrong{color:#b91c1c}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;padding:2px 6px;border-radius:6px}
+pre{white-space:pre-wrap;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+</style>
 </head>
 <body>
 <header>
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <div class="brand">🌦️ Weather & Climate Quiz</div>
-        <div class="sub">Demo mode • QR join • Live scoreboard (same browser)</div>
-      </div>
-      <div class="tabs">
-        <button id="tabHost" class="tab active">Host</button>
-        <button id="tabStudent" class="tab">Student</button>
-      </div>
-    </div>
+  <div><strong>Solo Quiz Live Game (Firebase)</strong><div class="small">10s timer • quickest correct answer scores highest • multi-device realtime</div></div>
+  <div>
+    <button class="light" onclick="setMode('host')">Host</button>
+    <button class="light" onclick="setMode('player')">Player</button>
   </div>
 </header>
+<main><div id="app"></div></main>
 
-<main>
-  <div class="wrap">
-    <div id="warnDemo" class="alert warn">
-      <b>Demo mode:</b> Live sync works across multiple tabs/windows on the <b>same browser</b>.
-      It will <b>not</b> sync across different devices/phones.
-    </div>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js';
+import {
+  getFirestore, doc, setDoc, getDoc, onSnapshot, updateDoc, deleteField
+} from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js';
 
-    <div id="errBox" class="alert err" style="display:none;"></div>
+/* =======================
+   1) PASTE YOUR FIREBASE CONFIG BELOW
+   ======================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyBI-kJfFpBluI-4f8wqOcrgvQPVKGgWi3U",
+  authDomain: "caos-openday-quiz.firebaseapp.com",
+  projectId: "caos-openday-quiz",
+  storageBucket: "caos-openday-quiz.firebasestorage.app",
+  messagingSenderId: "790571453067",
+  appId: "1:790571453067:web:417c77bfa58c11a5b2228e",
+  measurementId: "G-GWZDYE2CH5"
+};
+/* =======================
+   2) QUESTIONS (Audited solo deck renumbered 1-75)
+   ======================= */
+const QUESTIONS = [
+{"num": 1, "question": "What is radiative forcing?", "options": ["Change in Earth's energy balance due to a driver (e.g., GHGs/aerosols)", "Trade winds", "Land breeze", "Atmospheric pressure"], "answerIndex": 0},
+{"num": 2, "question": "What causes the seasons?", "options": ["Cyclone", "Earth’s Magnetism", "Greenhouse effect", "Earth’s Rotation around its axis"], "answerIndex": 1},
+{"num": 3, "question": "What is the Hadley Cell?", "options": ["Sea breeze", "El Niño", "Monsoon winds", "Cyclone"], "answerIndex": 0},
+{"num": 4, "question": "What is a front in meteorology?", "options": ["Jet stream", "Humidity", "Atmospheric pressure", "Boundary between air masses"], "answerIndex": 3},
+{"num": 5, "question": "What is a drought?", "options": ["Monsoon winds", "Jet stream", "Polar Cell", "A prolonged period of below-normal rainfall causing water shortage"], "answerIndex": 3},
+{"num": 6, "question": "What is a blizzard?", "options": ["A severe snowstorm with strong winds and low visibility", "Humidity", "Monsoon winds", "Mesosphere"], "answerIndex": 0},
+{"num": 7, "question": "What is a monsoon?", "options": ["Jet stream", "Humidity", "Cumulonimbus", "Seasonal reversal of winds bringing rainfall"], "answerIndex": 3},
+{"num": 8, "question": "What is a sea breeze?", "options": ["Sea breeze", "Wind blowing from sea to land during the day", "Convection", "La Niña"], "answerIndex": 1},
+{"num": 9, "question": "What is a land breeze?", "options": ["Mesosphere", "El Niño", "Ferrel Cell", "Wind blowing from land to sea at night"], "answerIndex": 3},
+{"num": 10, "question": "What is an anticyclone?", "options": ["Large rotating storm around low pressure", "Jet stream", "Trade winds", "High-pressure system with sinking air and fair weather"], "answerIndex": 0},
+{"num": 11, "question": "What is a tornado?", "options": ["A violently rotating column of air extending from a thunderstorm to the ground", "Monsoon winds", "Trade winds", "La Niña"], "answerIndex": 0},
+{"num": 12, "question": "What is a heat wave?", "options": ["Jet stream", "El Niño", "Trade winds", "Prolonged period of unusually high temperatures"], "answerIndex": 3},
+{"num": 13, "question": "What is a cold wave?", "options": ["Atmospheric pressure", "Stratosphere", "Cyclone", "Prolonged period of unusually low temperatures"], "answerIndex": 2},
+{"num": 14, "question": "What is a rain shadow region?", "options": ["Sea breeze", "The dry leeward side of a mountain range", "Hadley Cell", "Atmospheric pressure"], "answerIndex": 1},
+{"num": 15, "question": "What is orographic rainfall?", "options": ["Rainfall caused when moist air is forced to rise over mountains", "Cyclone", "Trade winds", "Atmospheric pressure"], "answerIndex": 0},
+{"num": 16, "question": "What is frontal rainfall?", "options": ["Convection", "Humidity", "Mesosphere", "Rainfall occurring along fronts where warm and cold air meet"], "answerIndex": 3},
+{"num": 17, "question": "What is convectional rainfall?", "options": ["Jet stream", "Atmospheric pressure", "Rainfall caused by rising warm air that cools and condenses", "La Niña"], "answerIndex": 2},
+{"num": 18, "question": "What is a cumulonimbus cloud?", "options": ["Towering thunderstorm cloud producing heavy rain, lightning, hail", "Trade winds", "Sea breeze", "Stratosphere"], "answerIndex": 0},
+{"num": 19, "question": "What is a cirrus cloud?", "options": ["Thin, wispy high-altitude ice-crystal cloud", "Monsoon winds", "Mesosphere", "Cyclone"], "answerIndex": 0},
+{"num": 20, "question": "What is a stratus cloud?", "options": ["Trade winds", "Low, uniform cloud layer often covering the sky", "Land breeze", "Coriolis force"], "answerIndex": 1},
+{"num": 21, "question": "What is a cumulus cloud?", "options": ["La Niña", "Jet stream", "Puffy cotton-like cloud with flat base", "Ferrel Cell"], "answerIndex": 2},
+{"num": 22, "question": "What is lightning?", "options": ["Sudden electrostatic discharge in the atmosphere", "Sea breeze", "Monsoon winds", "Humidity"], "answerIndex": 0},
+{"num": 23, "question": "What is thunder?", "options": ["Trade winds", "Sound produced by rapid expansion of air heated by lightning", "Mesosphere", "Coriolis force"], "answerIndex": 1},
+{"num": 24, "question": "What is hail?", "options": ["Sea breeze", "Monsoon winds", "Balls/lumps of ice falling from thunderstorms", "Humidity"], "answerIndex": 2},
+{"num": 25, "question": "What is dew?", "options": ["Liquid water condensed on surfaces when they cool below dew point", "Cyclone", "Ferrel Cell", "Atmospheric pressure"], "answerIndex": 0},
+{"num": 26, "question": "What is frost?", "options": ["Sea breeze", "Trade winds", "Ice crystals formed when water vapour deposits on cold surfaces", "Jet stream"], "answerIndex": 2},
+{"num": 27, "question": "What is fog?", "options": ["Cloud at ground level reducing visibility", "Coriolis force", "Mesosphere", "El Niño"], "answerIndex": 0},
+{"num": 28, "question": "What is mist?", "options": ["Monsoon winds", "Humidity", "Trade winds", "Thin fog with slightly better visibility than dense fog"], "answerIndex": 3},
+{"num": 29, "question": "What is smog?", "options": ["Ferrel Cell", "La Niña", "Polluted haze formed by smoke + fog/air pollutants", "Humidity"], "answerIndex": 2},
+{"num": 30, "question": "What is air mass?", "options": ["Cyclone", "Large body of air with similar temperature and humidity characteristics", "Mesosphere", "Sea breeze"], "answerIndex": 1},
+{"num": 31, "question": "What is an occluded front?", "options": ["Atmospheric pressure", "Convection", "Front formed when a cold front overtakes a warm front", "Monsoon winds"], "answerIndex": 2},
+{"num": 32, "question": "What is a stationary front?", "options": ["Boundary between air masses that is not moving significantly", "Cyclone", "Trade winds", "El Niño"], "answerIndex": 0},
+{"num": 33, "question": "What is advection?", "options": ["Coriolis force", "Humidity", "Horizontal transport of air/heat/moisture", "Land breeze"], "answerIndex": 2},
+{"num": 34, "question": "What is subsidence?", "options": ["Jet stream", "Trade winds", "Sea breeze", "Sinking of air in the atmosphere"], "answerIndex": 3},
+{"num": 35, "question": "What is latent heat?", "options": ["Heat absorbed/released during phase change without temperature change", "Humidity", "Mesosphere", "Cyclone"], "answerIndex": 0},
+{"num": 36, "question": "What is the greenhouse gas with highest concentration after water vapour?", "options": ["El Niño", "Sea breeze", "Carbon dioxide (CO₂)", "Trade winds"], "answerIndex": 2},
+{"num": 37, "question": "What is methane’s chemical formula?", "options": ["Ferrel Cell", "CH₄", "Land breeze", "Coriolis force"], "answerIndex": 1},
+{"num": 38, "question": "What is ozone’s chemical formula?", "options": ["O₃", "Monsoon winds", "Cyclone", "Humidity"], "answerIndex": 0},
+{"num": 39, "question": "What is nitrous oxide’s chemical formula?", "options": ["Trade winds", "Jet stream", "Sea breeze", "N₂O"], "answerIndex": 3},
+{"num": 40, "question": "What is the chemical formula of carbon dioxide?", "options": ["Cyclone", "Atmospheric pressure", "Mesosphere", "CO₂"], "answerIndex": 3},
+{"num": 41, "question": "What is the ozone hole?", "options": ["La Niña", "Humidity", "Region of significant ozone depletion, especially over Antarctica", "Trade winds"], "answerIndex": 2},
+{"num": 42, "question": "What is acid rain?", "options": ["Sea breeze", "Coriolis force", "Land breeze", "Precipitation made acidic by pollutants like SO₂/NOₓ"], "answerIndex": 3},
+{"num": 43, "question": "What is the carbon footprint?", "options": ["Jet stream", "Total greenhouse gas emissions caused by an activity/person/product", "Ferrel Cell", "Mesosphere"], "answerIndex": 1},
+{"num": 44, "question": "What is renewable energy?", "options": ["Trade winds", "Energy from naturally replenished sources", "Humidity", "Atmospheric pressure"], "answerIndex": 1},
+{"num": 45, "question": "What is solar energy?", "options": ["Energy obtained from sunlight", "Sea breeze", "Cyclone", "Convection"], "answerIndex": 0},
+{"num": 46, "question": "What is wind energy?", "options": ["Mesosphere", "Energy generated from moving air using turbines", "Land breeze", "Jet stream"], "answerIndex": 1},
+{"num": 47, "question": "What is hydropower?", "options": ["Electricity generated from flowing/falling water", "Trade winds", "Humidity", "Ferrel Cell"], "answerIndex": 0},
+{"num": 48, "question": "What is geothermal energy?", "options": ["Sea breeze", "Monsoon winds", "Cyclone", "Energy from Earth's internal heat"], "answerIndex": 3},
+{"num": 49, "question": "What is biomass energy?", "options": ["Atmospheric pressure", "Jet stream", "Energy from organic matter like plant/animal waste", "Mesosphere"], "answerIndex": 2},
+{"num": 50, "question": "What is fossil fuel?", "options": ["Humidity", "Trade winds", "Land breeze", "Coal, oil, or natural gas formed from ancient organic matter"], "answerIndex": 3},
+{"num": 51, "question": "What is climate mitigation?", "options": ["Sea breeze", "Cyclone", "Actions that reduce greenhouse gas emissions or enhance sinks", "Ferrel Cell"], "answerIndex": 2},
+{"num": 52, "question": "What is climate adaptation?", "options": ["Jet stream", "Adjusting systems/lifestyles to reduce harm from climate impacts", "Trade winds", "Mesosphere"], "answerIndex": 1},
+{"num": 53, "question": "What is net zero emissions?", "options": ["Coriolis force", "Balance between emissions released and removed from atmosphere", "Sea breeze", "Humidity"], "answerIndex": 1},
+{"num": 54, "question": "What is the Paris Agreement?", "options": ["Land breeze", "Convection", "Ferrel Cell", "2015 international climate agreement to limit warming"], "answerIndex": 3},
+{"num": 55, "question": "What is the Kyoto Protocol?", "options": ["1997 treaty setting binding emission targets for developed countries", "Trade winds", "Monsoon winds", "Cyclone"], "answerIndex": 0},
+{"num": 56, "question": "What is COP in climate negotiations?", "options": ["Sea breeze", "Humidity", "Conference of the Parties", "Mesosphere"], "answerIndex": 2},
+{"num": 57, "question": "What is an ecosystem?", "options": ["Community of organisms and their environment interacting together", "Jet stream", "Atmospheric pressure", "La Niña"], "answerIndex": 0},
+{"num": 58, "question": "What is biodiversity?", "options": ["Trade winds", "Cyclone", "Convection", "Variety of life forms in an area/on Earth"], "answerIndex": 3},
+{"num": 59, "question": "What is deforestation?", "options": ["Large-scale clearing/removal of forests", "Sea breeze", "Land breeze", "Humidity"], "answerIndex": 0},
+{"num": 60, "question": "What is desertification?", "options": ["Degradation of fertile land into more desert-like conditions", "Mesosphere", "Jet stream", "Ferrel Cell"], "answerIndex": 0},
+{"num": 61, "question": "What is sea-level rise?", "options": ["Monsoon winds", "Increase in average ocean height due to warming and ice melt", "Trade winds", "Coriolis force"], "answerIndex": 1},
+{"num": 62, "question": "What is glacier melt?", "options": ["Loss of ice mass from glaciers due to warming", "Cyclone", "Sea breeze", "Humidity"], "answerIndex": 0},
+{"num": 63, "question": "What is El Niño Southern Oscillation (ENSO)?", "options": ["Jet stream", "Atmospheric pressure", "Climate pattern involving oscillations in Pacific ocean-atmosphere system", "Land breeze"], "answerIndex": 2},
+{"num": 64, "question": "What is La Niña?", "options": ["Trade winds", "Cool phase of ENSO with cooler-than-normal eastern/central Pacific SSTs", "Convection", "Mesosphere"], "answerIndex": 1},
+{"num": 65, "question": "What is El Niño?", "options": ["Cyclone", "Warm phase of ENSO with warmer-than-normal eastern/central Pacific SSTs", "Sea breeze", "Ferrel Cell"], "answerIndex": 1},
+{"num": 66, "question": "What is the Intertropical Convergence Zone (ITCZ)?", "options": ["Humidity", "Jet stream", "Belt near equator where trade winds converge and air rises", "Monsoon winds"], "answerIndex": 2},
+{"num": 67, "question": "What is a jet stream?", "options": ["Land breeze", "Narrow band of very strong winds high in the atmosphere", "Cyclone", "Mesosphere"], "answerIndex": 1},
+{"num": 68, "question": "What is a trade wind?", "options": ["Sea breeze", "Persistent tropical easterly winds toward the equator", "Convection", "Atmospheric pressure"], "answerIndex": 1},
+{"num": 69, "question": "What is an aerosol?", "options": ["Tiny solid/liquid particles suspended in the air", "Trade winds", "Ferrel Cell", "Humidity"], "answerIndex": 0},
+{"num": 70, "question": "What is black carbon?", "options": ["Jet stream", "Sea breeze", "Soot-like aerosol produced by incomplete combustion", "Cyclone"], "answerIndex": 2},
+{"num": 71, "question": "What is a thermal inversion?", "options": ["Convection", "Land breeze", "Mesosphere", "Layer where temperature increases with height, trapping pollutants"], "answerIndex": 3},
+{"num": 72, "question": "What is the Beaufort scale?", "options": ["Humidity", "Scale for estimating wind force based on observed conditions", "Trade winds", "Atmospheric pressure"], "answerIndex": 1},
+{"num": 73, "question": "What is the Saffir–Simpson scale?", "options": ["Sea breeze", "Jet stream", "Ferrel Cell", "Hurricane intensity scale based on sustained wind speed"], "answerIndex": 3},
+{"num": 74, "question": "What is a weather satellite?", "options": ["Cyclone", "Convection", "Satellite used to observe weather systems/clouds/atmosphere", "Land breeze"], "answerIndex": 2},
+{"num": 75, "question": "Which of the following is NOT a greenhouse gas?", "options": ["Carbon dioxide (CO₂)", "Methane (CH₄)", "Oxygen (O₂)", "Nitrous oxide (N₂O)"], "answerIndex": 2}
+];
 
-    <div class="grid">
-      <!-- LEFT -->
-      <div id="leftCol" class="col"></div>
+const cfgReady = firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.appId;
+let db = null;
+if (cfgReady) {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+}
 
-      <!-- RIGHT -->
-      <div class="col">
-        <div class="card">
-          <div class="cardH">
-            <div>
-              <div class="cardT">Live Scoreboard</div>
-              <div id="sbSub" class="cardS">—</div>
-            </div>
-            <div id="qPill" class="pill" style="display:none;"></div>
-          </div>
-          <div class="cardB">
-            <div id="top3" class="top3"></div>
-            <div style="overflow:hidden;border:1px solid #e6e6e6;border-radius:18px;">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th><th>Name</th><th class="r">Score</th><th class="r">Answered</th>
-                  </tr>
-                </thead>
-                <tbody id="sbRows"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+const userId = localStorage.userId || (localStorage.userId = 'u' + Math.random().toString(36).slice(2));
+let mode = new URL(location).searchParams.get('mode') || 'host';
+let gamePin = new URL(location).searchParams.get('pin') || '';
+let state = null;
+let unsub = null;
 
-        <div style="height:16px;"></div>
+function setMode(m){ mode=m; syncUrl(); attachListener(); render(); }
+function syncUrl(){ const u=new URL(location); u.searchParams.set('mode',mode); if(gamePin)u.searchParams.set('pin',gamePin); history.replaceState(null,'',u); }
+function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
+function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); return u.toString(); }
+function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
 
-        <div class="card">
-          <div class="cardH">
-            <div>
-              <div class="cardT">Classroom Flow</div>
-              <div class="cardS">2-minute setup checklist</div>
-            </div>
-          </div>
-          <div class="cardB">
-            <ol class="muted" style="margin:0;padding-left:18px;line-height:1.6;">
-              <li>Host: Create room → project QR.</li>
-              <li>Students: scan QR → enter name → Join.</li>
-              <li>Host: Start → Next/Prev to control pacing.</li>
-              <li>End: click End and screenshot scoreboard.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      If you later want multi-device realtime (phones + laptops), switch to Firebase/Firestore.
-    </footer>
-  </div>
-</main>
-
-<script>
-  /***********************
-   * Demo-mode backend
-   ***********************/
-  const CHANNEL = "wc_quiz_demo_bc";
-  const bc = new BroadcastChannel(CHANNEL);
-
-  function roomKey(roomId){ return `wc_quiz_room_${roomId}`; }
-
-  function readRoom(roomId){
-    const raw = localStorage.getItem(roomKey(roomId));
-    return raw ? JSON.parse(raw) : null;
-  }
-
-  function writeRoom(roomId, roomObj){
-    localStorage.setItem(roomKey(roomId), JSON.stringify(roomObj));
-    bc.postMessage({ roomId, t: Date.now() });
-  }
-
-  /***********************
-   * Helpers
-   ***********************/
-  const $ = (id) => document.getElementById(id);
-  const errBox = $("errBox");
-
-  function setError(msg){
-    if(!msg){ errBox.style.display="none"; errBox.textContent=""; return; }
-    errBox.style.display="block";
-    errBox.textContent = msg;
-  }
-
-  function randomCode(){
-    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let out="";
-    for(let i=0;i<6;i++) out+=chars[Math.floor(Math.random()*chars.length)];
-    return out;
-  }
-
-  function ordinal(n){
-    const s=["th","st","nd","rd"], v=n%100;
-    return n + (s[(v-20)%10] || s[v] || s[0]);
-  }
-
-  function getUserId(){
-    const k="wc_quiz_user_id";
-    let v = localStorage.getItem(k);
-    if(v) return v;
-    v = "u_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
-    localStorage.setItem(k,v);
-    return v;
-  }
-  const userId = getUserId();
-
-  function getParam(name){
-    const u = new URL(location.href);
-    return u.searchParams.get(name);
-  }
-  function setParams(params){
-    const u = new URL(location.href);
-    Object.entries(params).forEach(([k,v])=>{
-      if(v===null || v===undefined || v==="") u.searchParams.delete(k);
-      else u.searchParams.set(k, v);
-    });
-    history.replaceState({}, "", u.toString());
-  }
-
-  function copyText(t){
-    navigator.clipboard.writeText(t).catch(()=>{});
-  }
-
-  function qrUrl(data){
-    return "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + encodeURIComponent(data);
-  }
-
-  /***********************
-   * Questions (editable in Host)
-   ***********************/
-  const DEFAULT_QUESTIONS = [
-    { id:"q1", level:"Easy", question:"What is the main difference between weather and climate?",
-      options:["Weather is hot, climate is cold","Weather is short-term; climate is long-term patterns","Climate changes daily","Weather lasts for years"], answerIndex:1 },
-    { id:"q2", level:"Easy", question:"What instrument is used to measure atmospheric pressure?",
-      options:["Thermometer","Hygrometer","Barometer","Anemometer"], answerIndex:2 },
-    { id:"q3", level:"Easy", question:"Which gas contributes the most to the greenhouse effect naturally?",
-      options:["Oxygen","Nitrogen","Carbon Dioxide","Water Vapour"], answerIndex:3 },
-    { id:"q4", level:"Easy", question:"What scale is commonly used worldwide to measure temperature?",
-      options:["Kelvin","Celsius","Fahrenheit","Rankine"], answerIndex:1 },
-    { id:"q5", level:"Easy", question:"What causes day and night?",
-      options:["Earth’s revolution","Earth’s rotation","The Moon’s shadow","Solar flares"], answerIndex:1 },
-    { id:"q6", level:"Intermediate", question:"What is the name of the boundary between two air masses?",
-      options:["Cyclone","Jet Stream","Front","Isobar"], answerIndex:2 },
-    { id:"q7", level:"Intermediate", question:"El Niño is primarily associated with which ocean?",
-      options:["Atlantic Ocean","Indian Ocean","Pacific Ocean","Arctic Ocean"], answerIndex:2 },
-    { id:"q8", level:"Intermediate", question:"What does the term “humidity” measure?",
-      options:["Air pressure","Wind speed","Water vapour in air","Temperature"], answerIndex:2 },
-    { id:"q9", level:"Intermediate", question:"Which layer of the atmosphere contains most weather phenomena?",
-      options:["Stratosphere","Troposphere","Mesosphere","Thermosphere"], answerIndex:1 },
-    { id:"q10", level:"Intermediate", question:"What type of cloud is typically associated with thunderstorms?",
-      options:["Cirrus","Cumulus","Stratus","Cumulonimbus"], answerIndex:3 },
-    { id:"q11", level:"Advanced", question:"What is the primary driver of global atmospheric circulation?",
-      options:["Ocean currents","Earth’s magnetic field","Uneven heating of Earth by the Sun","Volcanic eruptions"], answerIndex:2 },
-    { id:"q12", level:"Advanced", question:"The Coriolis effect is caused by:",
-      options:["Ocean waves","Earth’s rotation","Solar radiation","Air pressure differences"], answerIndex:1 },
-    { id:"q13", level:"Advanced", question:"The long-term average of weather conditions in a region is called:",
-      options:["Forecast","Climate","Pressure system","Monsoon"], answerIndex:1 },
-    { id:"q14", level:"Advanced", question:"Which phenomenon involves warming of surface ocean waters in the central and eastern Pacific?",
-      options:["La Niña","El Niño","Monsoon","Cyclogenesis"], answerIndex:1 },
-    { id:"q15", level:"Advanced", question:"Which of the following is NOT a greenhouse gas?",
-      options:["Methane","Nitrous Oxide","Oxygen","Carbon Dioxide"], answerIndex:2 },
-  ];
-
-  /***********************
-   * App state
-   ***********************/
-  let mode = (getParam("mode") === "student") ? "student" : "host";
-  let roomId = (getParam("room") || "").toUpperCase().trim();
-  let room = roomId ? readRoom(roomId) : null;
-
-  let studentName = localStorage.getItem("wc_quiz_name") || "";
-
-  $("tabHost").addEventListener("click", ()=>{ mode="host"; setParams({ mode:"host" }); render(); });
-  $("tabStudent").addEventListener("click", ()=>{ mode="student"; setParams({ mode:"student" }); render(); });
-
-  bc.addEventListener("message", (e)=>{
-    if(e?.data?.roomId && e.data.roomId === roomId){
-      room = readRoom(roomId);
-      render();
-    }
+async function loadState(){
+  if(!cfgReady || !db || !gamePin) return null;
+  const ref = doc(db, 'quizGames', gamePin);
+  const snap = await getDoc(ref);
+  return snap.exists() ? snap.data() : null;
+}
+async function saveState(){
+  const ref = doc(db, 'quizGames', gamePin);
+  await setDoc(ref, state, { merge: true });
+}
+async function patchState(patch){
+  const ref = doc(db, 'quizGames', gamePin);
+  await updateDoc(ref, patch);
+}
+function attachListener(){
+  if(unsub){ unsub(); unsub = null; }
+  if(!cfgReady || !db || !gamePin) return;
+  const ref = doc(db, 'quizGames', gamePin);
+  unsub = onSnapshot(ref, (snap) => {
+    state = snap.exists() ? snap.data() : null;
+    render();
   });
+}
 
-  // If loaded with a room param, keep room fresh even without BC (same tab)
-  window.addEventListener("storage", (e)=>{
-    if(roomId && e.key === roomKey(roomId)){
-      room = readRoom(roomId);
-      render();
-    }
-  });
-
-  /***********************
-   * Rendering
-   ***********************/
-  function render(){
-    setError("");
-    $("tabHost").classList.toggle("active", mode==="host");
-    $("tabStudent").classList.toggle("active", mode==="student");
-
-    // Keep URL consistent
-    setParams({ room: roomId || null, mode: mode });
-
-    // Build left column
-    $("leftCol").innerHTML = (mode==="host") ? hostView() : studentView();
-
-    // Wire handlers after inject
-    if(mode==="host") wireHost();
-    else wireStudent();
-
-    renderScoreboard();
-  }
-
-  function hostView(){
-    const status = room?.status || "—";
-    const joinLink = roomId ? buildJoinLink(roomId) : "";
-    const qr = joinLink ? `<img class="qrimg" src="${qrUrl(joinLink)}" alt="QR" />` : "";
-
-    const qJson = JSON.stringify(room?.questions || DEFAULT_QUESTIONS, null, 2);
-
-    return `
-      <div class="card">
-        <div class="cardH">
-          <div>
-            <div class="cardT">Host Console</div>
-            <div class="cardS">Create a room, share QR, control questions.</div>
-          </div>
-          <div style="text-align:right">
-            <div class="muted">Room</div>
-            <div style="font-weight:900">${roomId || "—"}</div>
-          </div>
-        </div>
-        <div class="cardB">
-          <div class="smallrow" style="margin-bottom:10px;">
-            <button class="btn dark" id="btnCreate">Create New Room</button>
-          </div>
-
-          <div class="two">
-            <div>
-              <div class="muted" style="font-weight:800">Or open an existing Room Code</div>
-              <input id="hostRoomInput" placeholder="e.g., 7K3PZQ" value="${roomId || ""}" />
-            </div>
-            <div>
-              <div class="muted" style="font-weight:800">Status</div>
-              <div class="pill" style="display:inline-block;margin-top:6px;">${status}</div>
-            </div>
-          </div>
-
-          ${roomId ? `
-            <div style="height:12px"></div>
-            <div class="two">
-              <div class="card" style="border-radius:18px;">
-                <div class="cardB">
-                  <div style="font-weight:900;">Join Link</div>
-                  <div class="linkbox" id="joinLinkBox">${joinLink}</div>
-                  <div class="smallrow" style="margin-top:10px;">
-                    <button class="btn gray" id="btnCopyLink">Copy link</button>
-                    <button class="btn gray" id="btnCopyCode">Copy code</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card" style="border-radius:18px;">
-                <div class="cardB">
-                  <div class="qrbox">
-                    ${qr}
-                    <div class="muted">
-                      <div style="font-weight:900;color:#111;">Scan to join</div>
-                      <div style="margin-top:6px;font-size:11px;word-break:break-all">${joinLink}</div>
-                      <div style="margin-top:8px;font-size:11px;color:#777;">Tip: Students can also type Room Code.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-            <div class="two">
-              <button class="btn green" id="btnStart">Start</button>
-              <button class="btn red" id="btnEnd">End</button>
-            </div>
-            <div style="height:10px"></div>
-            <div class="two">
-              <button class="btn gray" id="btnPrev">Prev</button>
-              <button class="btn gray" id="btnNext">Next</button>
-            </div>
-          ` : ""}
-
-        </div>
-      </div>
-
-      <div style="height:16px"></div>
-
-      <div class="card">
-        <div class="cardH">
-          <div>
-            <div class="cardT">Question Bank (JSON)</div>
-            <div class="cardS">Edit questions/options/answers. Save resets quiz to Lobby.</div>
-          </div>
-          <button class="btn dark" id="btnSaveQ">Save</button>
-        </div>
-        <div class="cardB">
-          <textarea id="qEditor" spellcheck="false">${escapeHtml(qJson)}</textarea>
-          <div class="muted" style="margin-top:8px;">
-            Format: array of { id, level, question, options[], answerIndex }
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function studentView(){
-    const status = room?.status || "—";
-    const total = room?.questions?.length || 0;
-    const idx = (room?.currentIndex ?? 0);
-    const q = (room?.questions && room.questions[idx]) ? room.questions[idx] : null;
-
-    const me = room?.answers?.[userId] || null;
-    const myByQ = me?.byQ || {};
-    const myScore = me?.score || 0;
-
-    const alreadyAnswered = q ? (myByQ[q.id] !== undefined) : false;
-
-    let qBlock = `
-      <div class="muted" style="border:1px dashed #ddd;background:#fafafa;padding:16px;border-radius:18px;">
-        No active question right now.
-      </div>
-    `;
-
-    if(status === "ended"){
-      qBlock = `
-        <div class="muted" style="border:1px dashed #ddd;background:#fafafa;padding:16px;border-radius:18px;">
-          Quiz ended. Check your rank on the scoreboard.
-        </div>
-      `;
-    } else if(status === "lobby"){
-      qBlock = `
-        <div class="muted" style="border:1px dashed #ddd;background:#fafafa;padding:16px;border-radius:18px;">
-          Host is preparing. Questions will appear when the quiz starts.
-        </div>
-      `;
-    } else if(status === "live" && q){
-      const opts = q.options.map((opt, i)=>{
-        const chosen = (myByQ[q.id] === i);
-        const cls = [
-          "opt",
-          chosen ? "chosen" : "",
-          alreadyAnswered && !chosen ? "disabled" : ""
-        ].join(" ");
-        const badgeCls = chosen ? "badge" : "badge light";
-        const label = String.fromCharCode(65+i);
-        return `
-          <button class="${cls}" data-opt="${i}" ${alreadyAnswered ? "disabled" : ""}>
-            <div class="${badgeCls}">${label}</div>
-            <div>${escapeHtml(opt)}</div>
-          </button>
-        `;
-      }).join("");
-
-      qBlock = `
-        <div class="qtitle">${escapeHtml(q.question)}</div>
-        <div class="muted" style="margin-top:6px;">Pick one option. You can answer only once per question.</div>
-        <div style="height:12px"></div>
-        <div style="display:grid;gap:10px;">${opts}</div>
-        ${alreadyAnswered ? `<div class="alert warn" style="margin-top:12px;"><b>Answer submitted ✅</b> Wait for the next question.</div>` : ""}
-      `;
-    }
-
-    const qTitle = q ? `Question ${idx+1}/${total} • ${q.level || ""}` : "Waiting for host…";
-    const qSub = (!q) ? "Join a room and wait for the host to start." : "";
-
-    return `
-      <div class="card">
-        <div class="cardH">
-          <div>
-            <div class="cardT">Student Portal</div>
-            <div class="cardS">Join with Room Code and your name.</div>
-          </div>
-        </div>
-        <div class="cardB">
-          <div class="two">
-            <div>
-              <div class="muted" style="font-weight:800">Room Code</div>
-              <input id="studRoomInput" placeholder="e.g., 7K3PZQ" value="${roomId || ""}" />
-            </div>
-            <div>
-              <div class="muted" style="font-weight:800">Your Name</div>
-              <input id="studNameInput" placeholder="e.g., Ananya" value="${escapeHtml(studentName)}" />
-            </div>
-          </div>
-          <div style="height:10px"></div>
-          <button class="btn dark" id="btnJoin">Join</button>
-
-          <div class="muted" style="margin-top:10px;">
-            Status: <b style="color:#111">${status}</b> • Your score: <b style="color:#111">${myScore}</b>
-          </div>
-        </div>
-      </div>
-
-      <div style="height:16px"></div>
-
-      <div class="card">
-        <div class="cardH">
-          <div>
-            <div class="cardT">${escapeHtml(qTitle)}</div>
-            <div class="cardS">${escapeHtml(qSub)}</div>
-          </div>
-        </div>
-        <div class="cardB">
-          ${qBlock}
-        </div>
-      </div>
-    `;
-  }
-
-  function renderScoreboard(){
-    const title = room?.host?.title || "Scoreboard";
-    const status = room?.status || "—";
-    const total = room?.questions?.length || 0;
-    const idx = (room?.currentIndex ?? 0) + 1;
-
-    $("sbSub").textContent = `${title} • Status: ${status}`;
-    if(total){
-      $("qPill").style.display = "block";
-      $("qPill").textContent = `Q ${idx}/${total}`;
-    } else {
-      $("qPill").style.display = "none";
-    }
-
-    const answers = room?.answers || {};
-    const rows = Object.entries(answers).map(([uid,v])=>{
-      return {
-        uid,
-        name: v?.name || "(no name)",
-        score: Number(v?.score || 0),
-        answered: Object.keys(v?.byQ || {}).length
-      };
-    }).sort((a,b)=> b.score-a.score || a.name.localeCompare(b.name));
-
-    // top3
-    const top = rows.slice(0,3);
-    $("top3").innerHTML = top.map((p,i)=>`
-      <div class="mini">
-        <div class="rank">${ordinal(i+1)}</div>
-        <div class="nm" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</div>
-        <div class="sc">Score: ${p.score}</div>
-      </div>
-    `).join("");
-
-    // table
-    $("sbRows").innerHTML = rows.map((p,i)=>`
-      <tr>
-        <td>${i+1}</td>
-        <td><b>${escapeHtml(p.name)}</b></td>
-        <td class="r"><b>${p.score}</b></td>
-        <td class="r">${p.answered}</td>
-      </tr>
-    `).join("");
-
-    if(rows.length===0){
-      $("top3").innerHTML = `
-        <div class="mini" style="grid-column:1/-1;background:#fafafa;">
-          <div class="nm">No players yet</div>
-          <div class="sc">Students will appear here after joining.</div>
-        </div>
-      `;
-      $("sbRows").innerHTML = `<tr><td colspan="4" class="muted">No players yet.</td></tr>`;
-    }
-  }
-
-  /***********************
-   * Host actions wiring
-   ***********************/
-  function wireHost(){
-    const btnCreate = $("btnCreate");
-    const hostRoomInput = $("hostRoomInput");
-    const btnCopyLink = $("btnCopyLink");
-    const btnCopyCode = $("btnCopyCode");
-    const btnStart = $("btnStart");
-    const btnEnd = $("btnEnd");
-    const btnPrev = $("btnPrev");
-    const btnNext = $("btnNext");
-    const btnSaveQ = $("btnSaveQ");
-    const qEditor = $("qEditor");
-
-    btnCreate?.addEventListener("click", ()=>{
-      const code = randomCode();
-      roomId = code;
-      setParams({ room: roomId, mode: "host" });
-
-      room = {
-        roomId,
-        status: "lobby",
-        host: { title: "Weather & Climate Quiz" },
-        questions: DEFAULT_QUESTIONS,
-        currentIndex: 0,
-        answers: {},
-        createdAt: Date.now()
-      };
-      writeRoom(roomId, room);
-      render();
-    });
-
-    hostRoomInput?.addEventListener("input", (e)=>{
-      roomId = (e.target.value || "").toUpperCase().trim();
-      room = roomId ? readRoom(roomId) : null;
-      render();
-    });
-
-    btnCopyLink?.addEventListener("click", ()=>{
-      if(!roomId) return;
-      copyText(buildJoinLink(roomId));
-    });
-    btnCopyCode?.addEventListener("click", ()=>{
-      if(!roomId) return;
-      copyText(roomId);
-    });
-
-    btnStart?.addEventListener("click", ()=>{
-      if(!ensureRoom()) return;
-      room.status = "live";
-      room.currentIndex = 0;
-      writeRoom(roomId, room);
-      render();
-    });
-
-    btnEnd?.addEventListener("click", ()=>{
-      if(!ensureRoom()) return;
-      room.status = "ended";
-      writeRoom(roomId, room);
-      render();
-    });
-
-    btnPrev?.addEventListener("click", ()=>{
-      if(!ensureRoom()) return;
-      room.currentIndex = Math.max(0, (room.currentIndex||0) - 1);
-      writeRoom(roomId, room);
-      render();
-    });
-
-    btnNext?.addEventListener("click", ()=>{
-      if(!ensureRoom()) return;
-      const max = (room.questions?.length || 1) - 1;
-      room.currentIndex = Math.min(max, (room.currentIndex||0) + 1);
-      room.status = "live";
-      writeRoom(roomId, room);
-      render();
-    });
-
-    btnSaveQ?.addEventListener("click", ()=>{
-      if(!ensureRoom()) return;
-      const txt = qEditor.value;
-      let parsed = null;
-      try { parsed = JSON.parse(txt); } catch(e){ setError("Invalid JSON in Question Bank."); return; }
-      if(!Array.isArray(parsed) || parsed.length===0){ setError("Questions JSON must be a non-empty array."); return; }
-
-      // basic validation
-      for(let i=0;i<parsed.length;i++){
-        const q = parsed[i];
-        if(!q.question || !Array.isArray(q.options) || q.options.length<2){
-          setError(`Invalid question at index ${i}. Needs 'question' and 'options[]'.`);
-          return;
-        }
-        if(typeof q.answerIndex !== "number" || q.answerIndex<0 || q.answerIndex>=q.options.length){
-          setError(`Invalid answerIndex at index ${i}.`);
-          return;
-        }
-        if(!q.id) q.id = "q" + (i+1);
-      }
-
-      room.questions = parsed;
-      room.status = "lobby";
-      room.currentIndex = 0;
-      // keep answers (optional). For fresh start, wipe:
-      room.answers = {};
-      writeRoom(roomId, room);
-      render();
-    });
-  }
-
-  function ensureRoom(){
-    if(!roomId){ setError("Create or enter a Room Code first."); return false; }
-    room = readRoom(roomId);
-    if(!room){ setError("No room found for this code. Create a new room or check the code."); return false; }
-    return true;
-  }
-
-  /***********************
-   * Student actions wiring
-   ***********************/
-  function wireStudent(){
-    const studRoomInput = $("studRoomInput");
-    const studNameInput = $("studNameInput");
-    const btnJoin = $("btnJoin");
-
-    studRoomInput?.addEventListener("input", (e)=>{
-      roomId = (e.target.value || "").toUpperCase().trim();
-      room = roomId ? readRoom(roomId) : null;
-      render();
-    });
-
-    studNameInput?.addEventListener("input", (e)=>{
-      studentName = e.target.value || "";
-      localStorage.setItem("wc_quiz_name", studentName);
-    });
-
-    btnJoin?.addEventListener("click", ()=>{
-      setError("");
-      const code = (roomId || "").toUpperCase().trim();
-      const nm = (studentName || "").trim();
-      if(code.length < 4){ setError("Enter a valid Room Code."); return; }
-      if(!nm){ setError("Enter your name."); return; }
-
-      roomId = code;
-      room = readRoom(roomId);
-      if(!room){
-        setError("Room not found. Ask host for correct code.");
-        return;
-      }
-
-      room.answers = room.answers || {};
-      const me = room.answers[userId] || { name: nm, byQ: {}, score: 0 };
-      me.name = nm;
-      room.answers[userId] = me;
-
-      writeRoom(roomId, room);
-      setParams({ room: roomId, mode:"student" });
-      render();
-    });
-
-    // Option buttons (delegation)
-    $("leftCol").querySelectorAll("button[data-opt]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        setError("");
-        if(!roomId || !room) { setError("Join a room first."); return; }
-        const nm = (studentName || "").trim();
-        if(!nm) { setError("Enter your name first."); return; }
-
-        if(room.status !== "live") return;
-
-        const q = room.questions?.[room.currentIndex||0];
-        if(!q) return;
-
-        const me = room.answers?.[userId] || { name: nm, byQ: {}, score: 0 };
-        me.name = nm;
-        me.byQ = me.byQ || {};
-
-        // one answer only
-        if(me.byQ[q.id] !== undefined) return;
-
-        const sel = Number(btn.getAttribute("data-opt"));
-        me.byQ[q.id] = sel;
-        if(sel === q.answerIndex) me.score = Number(me.score || 0) + 1;
-
-        room.answers = room.answers || {};
-        room.answers[userId] = me;
-
-        writeRoom(roomId, room);
-        render();
-      });
-    });
-  }
-
-  function buildJoinLink(code){
-    const u = new URL(location.href);
-    u.searchParams.set("room", code);
-    u.searchParams.set("mode", "student");
-    return u.toString();
-  }
-
-  function escapeHtml(s){
-    return String(s)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  // initial render
-  if(roomId) room = readRoom(roomId);
+async function createGame(){
+  gamePin = makePin();
+  state = {
+    pin: gamePin,
+    title: 'Solo Quiz',
+    status: 'lobby',
+    current: 0,
+    questionStart: null,
+    players: {},
+    answered: {}
+  };
+  syncUrl();
+  await saveState();
+  attachListener();
   render();
+}
+async function startGame(){
+  state.status='live';
+  state.current=0;
+  state.questionStart=Date.now();
+  state.answered={};
+  await saveState();
+}
+async function nextQuestion(){
+  if(state.current < QUESTIONS.length - 1){
+    state.current += 1;
+    state.questionStart = Date.now();
+    state.answered = {};
+    await saveState();
+  } else {
+    state.status = 'finished';
+    await saveState();
+  }
+}
+async function addPlayer(name){
+  if(!name) name = 'Player';
+  const players = state.players || {};
+  players[userId] = players[userId] || { name, score: 0 };
+  players[userId].name = name;
+  state.players = players;
+  await saveState();
+}
+function remainingMs(){
+  if(!state || state.status!=='live' || !state.questionStart) return 10000;
+  return Math.max(0, 10000 - (Date.now() - state.questionStart));
+}
+async function answerQuestion(idx){
+  if(!state || state.status!=='live') return;
+  if((state.answered||{})[userId]) return;
+  const q = QUESTIONS[state.current];
+  const elapsed = Date.now() - state.questionStart;
+  const correct = idx === q.answerIndex;
+  let points = 0;
+  if(correct && elapsed <= 10000){
+    points = Math.max(100, Math.round(1000 - elapsed/10));
+  }
+  const players = state.players || {};
+  players[userId] = players[userId] || { name: 'Player', score: 0 };
+  players[userId].score += points;
+
+  const answered = state.answered || {};
+  answered[userId] = { idx, elapsed, correct, points };
+  state.players = players;
+  state.answered = answered;
+  await saveState();
+}
+
+setInterval(() => { if(state && state.status==='live') render(); }, 250);
+
+function configCard(){
+  return `
+  <div class="card">
+    <h2>Firebase setup required</h2>
+    <div class="body">
+      <p class="small">Paste your Firebase Web config into this HTML file first. Then upload it to GitHub Pages, Firebase Hosting, or Netlify.</p>
+      <pre>const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
+};</pre>
+      <p class="small">Recommended Firestore rules for this quiz are included in the companion text file.</p>
+    </div>
+  </div>`;
+}
+function hostView(){
+  if(!cfgReady) return configCard();
+  if(!state) return `<div class="card"><h2>Host</h2><div class="body"><button class="dark" onclick="createGame()">Create Game</button></div></div>`;
+  const q = QUESTIONS[state.current];
+  return `
+  <div class="card">
+    <h2>Host Console</h2>
+    <div class="body">
+      <div class="badge">GAME PIN: ${gamePin}</div>
+      <div style="margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <img src="${qr(gamePin)}" style="width:180px;height:180px;border:1px solid #ddd;border-radius:12px">
+        <div>
+          <div class="small">Players join via QR or link</div>
+          <div style="max-width:430px;word-break:break-all">${joinLink(gamePin)}</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="dark" onclick="startGame()">Start</button>
+        <button class="green" onclick="nextQuestion()">Next Question</button>
+      </div>
+      <div style="margin-top:16px" class="timer">${Math.ceil(remainingMs()/1000)}s</div>
+      <div class="small">Scoring: only correct answers within 10 seconds score points; faster answers score more.</div>
+      <hr>
+      <div class="small">Question ${state.current+1} / ${QUESTIONS.length}</div>
+      <h3>${q.question}</h3>
+      <ol type="A">${q.options.map(o => `<li>${o}</li>`).join('')}</ol>
+      <div class="small">Correct: ${'ABCD'[q.answerIndex]}. ${q.options[q.answerIndex]}</div>
+    </div>
+  </div>`;
+}
+function playerView(){
+  if(!cfgReady) return configCard();
+  if(!gamePin){
+    return `<div class="card"><h2>Join Game</h2><div class="body">
+      <input id="pin" placeholder="Enter GAME PIN">
+      <input id="name" placeholder="Your name" style="margin-top:10px">
+      <button class="dark" style="margin-top:10px" onclick="joinGame()">Join</button>
+    </div></div>`;
+  }
+  if(!state) return `<div class="card"><h2>Join Game</h2><div class="body"><div class="small">Loading game…</div></div></div>`;
+  const q = QUESTIONS[state.current];
+  const me = (state.players||{})[userId];
+  const answered = (state.answered||{})[userId];
+  return `
+  <div class="card">
+    <h2>Player</h2>
+    <div class="body">
+      ${!me ? `<div>
+        <input id="name" placeholder="Your name">
+        <button class="dark" style="margin-top:10px" onclick="addPlayer(document.getElementById('name').value || 'Player')">Enter</button>
+      </div>` : `
+      <div class="badge">${me.name}</div>
+      <div style="margin-top:10px" class="timer">${Math.ceil(remainingMs()/1000)}s</div>
+      <div class="small">Question ${state.current+1} / ${QUESTIONS.length}</div>
+      <h3>${q.question}</h3>
+      <div class="opts">
+        ${q.options.map((o,i)=>`<button onclick="answerQuestion(${i})" ${answered?'disabled':''}>${'ABCD'[i]}. ${o}</button>`).join('')}
+      </div>
+      ${answered ? `<div class="${answered.correct?'correct':'wrong'}" style="margin-top:12px;font-weight:700">${answered.correct?'Correct':'Incorrect'} • +${answered.points} pts</div>`:''}
+      <div style="margin-top:10px" class="small">Your score: ${me.score}</div>`}
+    </div>
+  </div>`;
+}
+function scoreboard(){
+  if(!state) return '';
+  const rows = Object.entries(state.players||{}).map(([uid,p])=>({name:p.name, score:p.score})).sort((a,b)=>b.score-a.score);
+  return `
+  <div class="card">
+    <h2>Scoreboard</h2>
+    <div class="body">
+      <table class="score">
+        <thead><tr><th>Rank</th><th>Name</th><th>Score</th></tr></thead>
+        <tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.name}</td><td>${r.score}</td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+async function joinGame(){
+  const pin = document.getElementById('pin').value.trim();
+  const name = document.getElementById('name').value.trim() || 'Player';
+  gamePin = pin;
+  syncUrl();
+  attachListener();
+  state = await loadState();
+  if(!state){ alert('Game not found. Check the GAME PIN.'); return; }
+  await addPlayer(name);
+}
+function render(){
+  document.getElementById('app').innerHTML = `
+  <div class="grid">
+    <div>${mode==='host' ? hostView() : playerView()}</div>
+    <div>${scoreboard()}</div>
+  </div>`;
+}
+syncUrl();
+attachListener();
+if(gamePin && cfgReady){
+  loadState().then(s => { state = s; render(); });
+} else {
+  render();
+}
+window.setMode=setMode;
+window.createGame=createGame;
+window.startGame=startGame;
+window.nextQuestion=nextQuestion;
+window.addPlayer=addPlayer;
+window.answerQuestion=answerQuestion;
+window.joinGame=joinGame;
 </script>
 </body>
 </html>
