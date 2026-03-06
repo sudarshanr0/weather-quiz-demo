@@ -5,35 +5,44 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Solo Quiz Live Game (Firebase)</title>
 <style>
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111}
-header{padding:16px 24px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;min-height:100vh;color:#ecfeff;background:radial-gradient(circle at 20% 15%,#1d4ed8 0%,#0f172a 45%,#020617 100%)}
+header{max-width:1200px;margin:20px auto 0;padding:18px 24px;background:rgba(15,23,42,.85);border:1px solid rgba(148,163,184,.25);border-radius:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;backdrop-filter:blur(10px);box-shadow:0 16px 40px rgba(2,6,23,.35)}
+.title{font-size:20px;font-weight:800;letter-spacing:.2px}
 main{max-width:1200px;margin:0 auto;padding:20px}
 .grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+@media(max-width:900px){header{margin:12px}.grid{grid-template-columns:1fr}}
+.card{background:linear-gradient(160deg,rgba(15,23,42,.93),rgba(30,41,59,.86));border:1px solid rgba(148,163,184,.25);border-radius:20px;box-shadow:0 18px 36px rgba(2,6,23,.35);color:#f8fafc}
 .card h2{margin:0;padding:18px 18px 8px;font-size:20px}
 .body{padding:18px}
-button{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
-.dark{background:#111;color:#fff}.light{background:#eef2ff}.green{background:#166534;color:#fff}
-input, textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px;box-sizing:border-box}
-.opts button{display:block;width:100%;text-align:left;margin:10px 0;background:#f8fafc;border:1px solid #e5e7eb}
-.small{color:#6b7280;font-size:13px}
-.score td,.score th{padding:8px 10px;border-bottom:1px solid #eee}.score{width:100%;border-collapse:collapse}
-.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;font-size:12px;font-weight:700}
-.timer{font-size:34px;font-weight:800}
-.correct{color:#15803d}.muted{color:#6b7280}.wrong{color:#b91c1c}
-.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;padding:2px 6px;border-radius:6px}
-pre{white-space:pre-wrap;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px}
-hr{border:none;border-top:1px solid #eee;margin:18px 0}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;transition:.2s transform,.2s box-shadow,.2s opacity}
+button:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,23,42,.3)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.dark{background:linear-gradient(120deg,#2563eb,#4f46e5);color:#fff}
+.light{background:rgba(15,23,42,.35);color:#e2e8f0;border:1px solid rgba(148,163,184,.35)}
+.green{background:linear-gradient(120deg,#15803d,#16a34a);color:#fff}
+input, textarea{width:100%;padding:12px;border:1px solid rgba(148,163,184,.45);border-radius:12px;background:rgba(15,23,42,.55);color:#f8fafc}
+.opts button{display:block;width:100%;text-align:left;margin:10px 0;background:rgba(15,23,42,.5);border:1px solid rgba(148,163,184,.35);color:#f8fafc}
+.small{color:#94a3b8;font-size:13px}
+.score{width:100%;border-collapse:collapse}
+.score td,.score th{padding:10px;border-bottom:1px solid rgba(148,163,184,.22)}
+.score th{text-align:left;color:#93c5fd}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(37,99,235,.24);border:1px solid rgba(147,197,253,.35);font-size:12px;font-weight:700;color:#dbeafe}
+.timer{font-size:34px;font-weight:800;color:#fef08a;text-shadow:0 0 20px rgba(250,204,21,.35)}
+.correct{color:#4ade80}.muted{color:#94a3b8}.wrong{color:#f87171}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(15,23,42,.55);padding:2px 6px;border-radius:6px}
+pre{white-space:pre-wrap;background:rgba(15,23,42,.55);border:1px solid rgba(148,163,184,.35);border-radius:12px;padding:12px}
+hr{border:none;border-top:1px solid rgba(148,163,184,.2);margin:18px 0}
+.hero-line{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.qr{width:180px;height:180px;border:1px solid rgba(148,163,184,.45);border-radius:12px;background:#fff;padding:4px}
+.join-link{max-width:430px;word-break:break-all;padding:10px;border-radius:12px;background:rgba(15,23,42,.5);border:1px dashed rgba(148,163,184,.45)}
+.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 <header>
-  <div><strong>Solo Quiz Live Game (Firebase)</strong><div class="small">10s timer • quickest correct answer scores highest • multi-device realtime</div></div>
-  <div>
-    <button class="light" onclick="setMode('host')">Host</button>
-    <button class="light" onclick="setMode('player')">Player</button>
-  </div>
+  <div><div class="title">Solo Quiz Live Game (Firebase)</div><div class="small">10s timer • quickest correct answer scores highest • multi-device realtime</div></div>
+  <div id="modeControls"></div>
 </header>
 <main><div id="app"></div></main>
 
@@ -143,17 +152,75 @@ if (cfgReady) {
   db = getFirestore(app);
 }
 
+const HOST_PASSWORD = 'ZIUQCAOS';
 const userId = localStorage.userId || (localStorage.userId = 'u' + Math.random().toString(36).slice(2));
-let mode = new URL(location).searchParams.get('mode') || 'host';
-let gamePin = new URL(location).searchParams.get('pin') || '';
+const url = new URL(location);
+const requestedMode = url.searchParams.get('mode') || 'home';
+let mode = ['home','host','player'].includes(requestedMode) ? requestedMode : 'home';
+let gamePin = url.searchParams.get('pin') || '';
 let state = null;
 let unsub = null;
+let hostAccess = false;
 
-function setMode(m){ mode=m; syncUrl(); attachListener(); render(); }
-function syncUrl(){ const u=new URL(location); u.searchParams.set('mode',mode); if(gamePin)u.searchParams.set('pin',gamePin); history.replaceState(null,'',u); }
+function refreshModeControls(){
+  const el = document.getElementById('modeControls');
+  if(!el) return;
+  if(mode==='home'){
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = `<button class="light" onclick="setMode('home')">Home</button>`;
+}
+function setMode(m){
+  if(m==='host'){
+    hostLogin();
+    return;
+  }
+  mode=m;
+  syncUrl();
+  attachListener();
+  render();
+}
+function syncUrl(){
+  const u=new URL(location);
+  u.searchParams.set('mode', mode);
+  if(gamePin) u.searchParams.set('pin',gamePin); else u.searchParams.delete('pin');
+  history.replaceState(null,'',u);
+}
 function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
 function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); return u.toString(); }
 function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
+
+async function hostLogin(){
+  const password = prompt('Enter host password');
+  if(password !== HOST_PASSWORD){
+    if(password !== null) alert('Invalid host password.');
+    return;
+  }
+  hostAccess = true;
+  mode = 'host';
+
+  if(!cfgReady){
+    syncUrl();
+    render();
+    return;
+  }
+
+  if(!gamePin){
+    await createGame();
+    return;
+  }
+
+  state = await loadState();
+  if(!state){
+    await createGame();
+    return;
+  }
+
+  syncUrl();
+  attachListener();
+  render();
+}
 
 async function loadState(){
   if(!cfgReady || !db || !gamePin) return null;
@@ -266,8 +333,26 @@ function configCard(){
     </div>
   </div>`;
 }
+
+function homeView(){
+  return `
+  <div class="card">
+    <h2>Welcome</h2>
+    <div class="body">
+      <p class="small">Choose how you want to use the quiz.</p>
+      <div class="actions">
+        <button class="dark" onclick="setMode('host')">Host</button>
+        <button class="light" onclick="setMode('player')">Player</button>
+      </div>
+      <hr>
+      <div class="small">Players can join by scanning the host QR code — no need to type a game PIN manually.</div>
+    </div>
+  </div>`;
+}
+
 function hostView(){
   if(!cfgReady) return configCard();
+  if(!hostAccess) return `<div class="card"><h2>Host Login</h2><div class="body"><button class="dark" onclick="hostLogin()">Login as Host</button></div></div>`;
   if(!state) return `<div class="card"><h2>Host</h2><div class="body"><button class="dark" onclick="createGame()">Create Game</button></div></div>`;
   const q = QUESTIONS[state.current];
   return `
@@ -275,14 +360,14 @@ function hostView(){
     <h2>Host Console</h2>
     <div class="body">
       <div class="badge">GAME PIN: ${gamePin}</div>
-      <div style="margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
-        <img src="${qr(gamePin)}" style="width:180px;height:180px;border:1px solid #ddd;border-radius:12px">
+      <div class="hero-line">
+        <img src="${qr(gamePin)}" class="qr">
         <div>
           <div class="small">Players join via QR or link</div>
-          <div style="max-width:430px;word-break:break-all">${joinLink(gamePin)}</div>
+          <div class="join-link">${joinLink(gamePin)}</div>
         </div>
       </div>
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+      <div class="actions">
         <button class="dark" onclick="startGame()">Start</button>
         <button class="green" onclick="nextQuestion()">Next Question</button>
       </div>
@@ -299,10 +384,9 @@ function hostView(){
 function playerView(){
   if(!cfgReady) return configCard();
   if(!gamePin){
-    return `<div class="card"><h2>Join Game</h2><div class="body">
-      <input id="pin" placeholder="Enter GAME PIN">
-      <input id="name" placeholder="Your name" style="margin-top:10px">
-      <button class="dark" style="margin-top:10px" onclick="joinGame()">Join</button>
+    return `<div class="card"><h2>Join as Player</h2><div class="body">
+      <div class="small">Scan this QR code from the host screen to join instantly (no GAME PIN typing needed).</div>
+      <div style="margin-top:12px" class="small">If you don't see a QR yet, ask the host to login and create a game first.</div>
     </div></div>`;
   }
   if(!state) return `<div class="card"><h2>Join Game</h2><div class="body"><div class="small">Loading game…</div></div></div>`;
@@ -343,37 +427,33 @@ function scoreboard(){
     </div>
   </div>`;
 }
-async function joinGame(){
-  const pin = document.getElementById('pin').value.trim();
-  const name = document.getElementById('name').value.trim() || 'Player';
-  gamePin = pin;
-  syncUrl();
-  attachListener();
-  state = await loadState();
-  if(!state){ alert('Game not found. Check the GAME PIN.'); return; }
-  await addPlayer(name);
-}
 function render(){
+  refreshModeControls();
   document.getElementById('app').innerHTML = `
   <div class="grid">
-    <div>${mode==='host' ? hostView() : playerView()}</div>
-    <div>${scoreboard()}</div>
+    <div>${mode==='home' ? homeView() : (mode==='host' ? hostView() : playerView())}</div>
+    <div>${mode==='home' ? '' : scoreboard()}</div>
   </div>`;
 }
-syncUrl();
-attachListener();
-if(gamePin && cfgReady){
-  loadState().then(s => { state = s; render(); });
-} else {
+async function init(){
+  if(mode==='host'){
+    mode = 'home';
+  }
+  syncUrl();
+  attachListener();
+  if(gamePin && cfgReady){
+    state = await loadState();
+  }
   render();
 }
+init();
+window.hostLogin=hostLogin;
 window.setMode=setMode;
 window.createGame=createGame;
 window.startGame=startGame;
 window.nextQuestion=nextQuestion;
 window.addPlayer=addPlayer;
 window.answerQuestion=answerQuestion;
-window.joinGame=joinGame;
 </script>
 </body>
 </html>
