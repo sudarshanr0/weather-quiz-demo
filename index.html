@@ -39,6 +39,7 @@ hr{border:none;border-top:1px solid rgba(148,163,184,.2);margin:18px 0}
 .qselect{margin-top:14px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end}
 @media(max-width:720px){.qselect{grid-template-columns:1fr}}
 .scroll{max-height:260px;overflow:auto;border:1px solid rgba(148,163,184,.25);border-radius:12px;padding:8px}
+.scroll{-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .item{padding:8px 10px;border-bottom:1px solid rgba(148,163,184,.15);cursor:pointer}
 .item:hover{background:rgba(255,255,255,.04)}
 .item.active{background:rgba(37,99,235,.18)}
@@ -74,6 +75,11 @@ const userId = localStorage.userId || (localStorage.userId = 'u' + Math.random()
 const url = new URL(location);
 let mode = ['home','host','player'].includes(url.searchParams.get('mode')) ? url.searchParams.get('mode') : 'home';
 let gamePin = url.searchParams.get('pin') || '';
+const hashPin = (url.hash || '').replace('#', '').trim();
+if (!gamePin && /^\d{6}$/.test(hashPin)) {
+  gamePin = hashPin;
+  mode = 'player';
+}
 let state = null;
 let unsub = null;
 let hostAccess = false;
@@ -110,10 +116,7 @@ function setMode(m) {
 
 function makePin() { return String(Math.floor(100000 + Math.random() * 900000)); }
 function joinLink(pin) {
-  const u = new URL(location.href);
-  u.searchParams.set('mode', 'player');
-  u.searchParams.set('pin', pin);
-  return u.toString();
+  return `${location.origin}${location.pathname}#${pin}`;
 }
 function qr(pin) {
   return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(joinLink(pin));
@@ -241,7 +244,15 @@ async function answerQuestion(idx) {
   await saveState();
 }
 
-setInterval(() => { if (state && state.status === 'live') render(); }, 250);
+function updateLiveTimers() {
+  if (!state || state.status !== 'live') return;
+  const seconds = `${Math.ceil(remainingMs()/1000)}s`;
+  document.querySelectorAll('[data-role="timer"]').forEach((el) => {
+    el.textContent = seconds;
+  });
+}
+
+setInterval(updateLiveTimers, 250);
 
 function homeView() {
   return `
@@ -284,7 +295,7 @@ function hostView() {
         <button class="light" onclick="showQuestion(parseInt(document.getElementById('qpicker').value,10))">Show Selected</button>
         <button class="red" onclick="state.status='finished'; saveState()">Finish</button>
       </div>
-      <div style="margin-top:16px" class="timer">${Math.ceil(remainingMs()/1000)}s</div>
+      <div style="margin-top:16px" class="timer" data-role="timer">${Math.ceil(remainingMs()/1000)}s</div>
       <div class="small">Quickest correct answer within 10 seconds gets more points.</div>
       <hr>
       <div class="small">Question ${state.current+1} / ${QUESTIONS.length}</div>
@@ -312,7 +323,7 @@ function playerView() {
     <div class="body">
       ${!me ? `<div><input id="name" placeholder="Your name"><button class="dark" style="margin-top:10px" onclick="addPlayer(document.getElementById('name').value || 'Player')">Enter</button></div>` : `
       <div class="badge">${me.name}</div>
-      <div style="margin-top:10px" class="timer">${Math.ceil(remainingMs()/1000)}s</div>
+      <div style="margin-top:10px" class="timer" data-role="timer">${Math.ceil(remainingMs()/1000)}s</div>
       <div class="small">Question ${state.current+1} / ${QUESTIONS.length}</div>
       <h3>${q.question}</h3>
       <div class="opts">
