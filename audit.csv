@@ -1,0 +1,76 @@
+Renumbered Q#,Original Q#,Question,A,B,C,D,Correct Option,Correct Option Text
+1,76,What is radiative forcing?,"Change in Earth's energy balance due to a driver (e.g., GHGs/aerosols)",Heat transfer by convection,Seasonal shift of winds,Cloud type in storms,A,"Change in Earth's energy balance due to a driver (e.g., GHGs/aerosols)"
+2,77,What causes the seasons?,Earth–Sun distance changes,Earth’s axial tilt relative to its orbit,Moon phases,Ocean tides,B,Earth’s axial tilt relative to its orbit
+3,78,What is the Hadley Cell?,Tropical circulation with rising air near equator and sinking in subtropics,Polar vortex circulation,Midlatitude storm track,Deep ocean circulation,A,Tropical circulation with rising air near equator and sinking in subtropics
+4,79,Difference between mitigation and adaptation in the context of climate change (CC)?,Mitigation builds seawalls; adaptation bans cars,They are the same,Mitigation is weather; adaptation is climate,Mitigation reduces emissions; adaptation reduces impacts/vulnerability,D,Mitigation reduces emissions; adaptation reduces impacts/vulnerability
+5,80,Primary driver of recent global warming?,Solar variability,Volcanic aerosols,Earth’s orbit changes,Human greenhouse gas emissions (fossil fuels),D,Human greenhouse gas emissions (fossil fuels)
+6,81,International agreement to limit warming below 2°C?,Paris Agreement,Kyoto Protocol,Montreal Protocol,Doha Amendment,A,Paris Agreement
+7,82,What is the target for Indian Net-Zero emissions according to Indian Government?,2050,2060,2030,2070,D,2070
+8,83,What is the heat wave?,A day with heavy rain,Prolonged period of unusually high temperatures,A sudden snowfall,A type of thunder,B,Prolonged period of unusually high temperatures
+9,84,What is the criteria for heatwaves according to IMD?,Humidity only,Wind speed only,Air pressure only,IMD criteria based on temperature thresholds and departure from normal,D,IMD criteria based on temperature thresholds and departure from normal
+10,85,What is the name of the longest continuous graph recording the carbon dioxide concertation?,Keeling Curve,Hockey stick graph,Arrhenius curve,Milankovitch curve,A,Keeling Curve
+11,86,Which instrument measures depth?,Barometer,Altimeter,Rain gauge,Fathometer,D,Fathometer
+12,87,Which instrument measures rainfall?,Rain gauge,Barometer,Anemometer,Thermometer,A,Rain gauge
+13,88,What is moving air called?,Wind,Hail,None of the above,Thunder,C,None of the above
+14,89,Which layer of the atmosphere do we live in?,Stratosphere,Troposphere,Mesosphere,Thermosphere,B,Troposphere
+15,90,What do we call frozen rain?,Hail,Storm,Snowfall,Permafrost,A,Hail
+16,91,Which gas is most abundant in Earth's atmosphere?,Oxygen,Carbon dioxide,Argon,Nitrogen,D,Nitrogen
+17,92,Which instrument measures air pressure?,Thermometer,Hygrometer,Barometer,Anemometer,C,Barometer
+18,93,What do we call a scientist who studies weather?,Meteorologist,Cosmologist,Ophthalmologist,Neurologist,A,Meteorologist
+19,94,A large rotating storm over oceans is called?,Convection,Lightning,Thunderstorm,Cyclone,D,Cyclone
+20,95,Formation of clouds happen through which process?,Evaporation,Sublimation,Condensation,Melting,C,Condensation
+21,96,What instrument measures wind speed?,Anemometer,Wind vane,Barometer,Thermometer,A,Anemometer
+22,97,Morning dew turning into ice is called what?,Frost,Permafrost,Hail,None of the above,A,Frost
+23,98,What is partly frozen rain called?,Moss,None of the above,Sleet,Hail,C,Sleet
+24,99,Average of weather conditions over a long time for an area is called what?,Climate,Averaged weather,Environment,Season,A,Climate
+25,100,What scale measures temperature in India?,Thermometer,Barometer,Hygrometer,Anemometer,A,Thermometer
+26,101,When do we celebrate environment day?,22 April,21 March,2 February,5 June,D,5 June
+27,102,Process of rising of warm air is called what?,Radiation,Convection,Conduction,Subsidence,B,Convection
+28,103,What is the opposite of El Nino?,Fi Nino,La Nina,Ex Nino,Mi Nina,B,La Nina
+29,104,What is the full form of ENSO?,Eastern North Sea Oscillation,Equatorial Neutral Sea Oscillation,El Niño Seasonal Oscillation,El Niño–Southern Oscillation,D,El Niño–Southern Oscillation
+30,105,What term describes heat trapped by gases?,Blackbox,Bluebox,Blackhouse,Greenhouse,D,Greenhouse
+31,106,Which current flows high in the atmosphere?,Ocean gyre,Trade winds,Land breeze,Jet stream,D,Jet stream
+32,107,Desert wind which blows from Sahara are called?,Bora,Harmattan,Sirocco,Foehn,C,Sirocco
+33,108,Which place in India receives maximum rainfall?,Jaisalmer,Chennai,Mawsynram,Leh,C,Mawsynram
+34,109,What forms when warm and cold air meet?,Gyre,Front,Drought,Inversion,B,Front
+35,110,What front forms when cold air advances?,Warm front,Cold front,Stationary front,Occluded front,B,Cold front
+36,111,What front forms when warm air advances?,Cold front,Stationary front,Warm front,Occluded front,C,Warm front
+37,112,What type of rainfall occurs due to mountains?,Convectional rainfall,Frontal rainfall,Orographic rainfall,Acid rain,C,Orographic rainfall
+38,113,What rainfall occurs due to heating?,Convectional rainfall,Orographic rainfall,Frontal rainfall,Cyclonic rain,A,Convectional rainfall
+39,114,What rainfall occurs along fronts?,Orographic rainfall,Frontal rainfall,Convectional rainfall,Monsoon rain,B,Frontal rainfall
+40,115,What measure describes moisture content?,Humidity,Dew Content,AQI,Moisture Map,A,Humidity
+41,116,Heat waves over oceans are called?,Cold surge,Marine heatwave,Storm tide,Upwelling,B,Marine heatwave
+42,117,Which is the driest place in India?,Mawsynram,Jaisalmer (Thar Desert region),Cherrapunji,Kochi,B,Jaisalmer (Thar Desert region)
+43,118,Circular ocean current is called what?,Gyre,Eddy current,Monsoon,Tide,A,Gyre
+44,119,The amount of solar radiation reaching a given area is called?,Insolation,Albedo,Radiative forcing,Humidity,A,Insolation
+45,120,What index measures drought severity?,Palmer Drought Severity Index (PDSI),AQI,UV index,Heat index,A,Palmer Drought Severity Index (PDSI)
+46,121,Coldest place in india is?,Dras,Jaisalmer,Mumbai,Chennai,A,Dras
+47,122,Which layer of atmosphere burns meteors?,Troposphere,Stratosphere,Mesosphere,Thermosphere,C,Mesosphere
+48,123,Which atmospheric layer has auroras?,Troposphere,Stratosphere,Mesosphere,Thermosphere,D,Thermosphere
+49,124,Which high-pressure system brings clear skies?,Cyclone,T ornado,Anticyclone,Front,C,Anticyclone
+50,125,low-pressure system which brings rain is called?,Anticyclone,Ridge,Inversion,Cyclone,D,Cyclone
+51,126,What is rising moist unstable air called?,Subsidence,Advection,Inversion,Convection,D,Convection
+52,127,What is sinking air called?,Convection,Subsidence,Evaporation,Upwelling,B,Subsidence
+53,128,The boundary which separates air masses is called?,Isobar,Thermocline,Front,Gyre,C,Front
+54,129,The zone where the northeast and southeast trade winds converge is called?,Intertropical Convergence Zone (ITCZ),Polar front,Jet stream,Subtropical high,A,Intertropical Convergence Zone (ITCZ)
+55,130,Which jet affects India in winter?,Polar jet,Easterly jet,Subtropical westerly jet,Low-level jet,C,Subtropical westerly jet
+56,131,Which global warming treaty was signed in 2015?,Kyoto Protocol,Montreal Protocol,Copenhagen Accord,Paris Agreement,D,Paris Agreement
+57,132,What index measures heat stress?,Richter scale,PDSI,Heat Index,AQI,C,Heat Index
+58,133,Which ocean absorbs the most amount of heat?,Arctic Ocean,Southern Ocean,Pacific Ocean,Indian Ocean,C,Pacific Ocean
+59,134,Suspension of fine solid particles or liquid droplets in air is called?,Matrix,Colloid,Aerosol,Magma,C,Aerosol
+60,135,When was IMD established ?,1875,1947,1905,1969,A,1875
+61,136,What is the main difference between weather and climate?,Climate changes hourly; weather changes yearly,Weather is short-term; climate is long-term average patterns,Weather is long-term; climate is short-term,They are the same,B,Weather is short-term; climate is long-term average patterns
+62,137,What instrument is used to measure atmospheric pressure?,Thermometer,Hygrometer,Barometer,Anemometer,C,Barometer
+63,138,Which gas contributes the most to the greenhouse effect naturally?,Cooling due to reflection of sunlight,Warming due to ozone depletion,Heating only from volcanoes,Warming due to trapping of outgoing infrared radiation by greenhouse gases,D,Warming due to trapping of outgoing infrared radiation by greenhouse gases
+64,139,What scale is commonly used worldwide to measure temperature?,Kelvin,Fahrenheit,Rankine,Celsius,D,Celsius
+65,140,What causes day and night?,Time Zone,Season,Rotation,Revolution,C,Rotation
+66,141,What is the name of the boundary between two air masses?,Isobar,Thermocline,Front,Gyre,C,Front
+67,142,El Niño is primarily associated with which ocean?,Arabian,Pacific,Antarctic,Indian,B,Pacific
+68,143,What does the term “humidity” measure?,Dust,Pollution,Heat,Moisture,D,Moisture
+69,144,Which layer of the atmosphere contains most weather phenomena?,Mesosphere,Exosphere,Stratosphere,Troposphere,D,Troposphere
+70,145,What type of cloud is typically associated with thunderstorms?,Cumulonimbus,Cirrus,Stratus,None of the above,A,Cumulonimbus
+71,146,What is the primary driver of global atmospheric circulation?,Volcanoes,Earth’s magnetic field,Uneven solar heating of Earth,Ocean salinity,C,Uneven solar heating of Earth
+72,147,The Coriolis effect is caused by:,Drag due to friction,Apparent deflection of moving air/objects due to Earth's rotation,Gravity variation with latitude,Magnetic field deflection,B,Apparent deflection of moving air/objects due to Earth's rotation
+73,148,The long-term average of weather conditions in a region is called:,Averaged Weather,None of the above,Climate,Season,C,Climate
+74,149,Which phenomenon involves warming of surface ocean waters in the central and eastern Pacific?,La Niña,El Niño,IOD,AMOC,B,El Niño
+75,150,Which of the following is NOT a greenhouse gas?,Carbon dioxide (CO₂),Methane (CH₄),Oxygen (O₂),Nitrous oxide (N₂O),C,Oxygen (O₂)

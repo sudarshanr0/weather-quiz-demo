@@ -1,0 +1,902 @@
+[
+  {
+    "numOriginal": 76,
+    "num": 1,
+    "question": "What is radiative forcing?",
+    "options": [
+      "Change in Earth's energy balance due to a driver (e.g., GHGs/aerosols)",
+      "Heat transfer by convection",
+      "Seasonal shift of winds",
+      "Cloud type in storms"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 77,
+    "num": 2,
+    "question": "What causes the seasons?",
+    "options": [
+      "Earth–Sun distance changes",
+      "Earth’s axial tilt relative to its orbit",
+      "Moon phases",
+      "Ocean tides"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 78,
+    "num": 3,
+    "question": "What is the Hadley Cell?",
+    "options": [
+      "Tropical circulation with rising air near equator and sinking in subtropics",
+      "Polar vortex circulation",
+      "Midlatitude storm track",
+      "Deep ocean circulation"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 79,
+    "num": 4,
+    "question": "Difference between mitigation and adaptation in the context of climate change (CC)?",
+    "options": [
+      "Mitigation builds seawalls; adaptation bans cars",
+      "They are the same",
+      "Mitigation is weather; adaptation is climate",
+      "Mitigation reduces emissions; adaptation reduces impacts/vulnerability"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 80,
+    "num": 5,
+    "question": "Primary driver of recent global warming?",
+    "options": [
+      "Solar variability",
+      "Volcanic aerosols",
+      "Earth’s orbit changes",
+      "Human greenhouse gas emissions (fossil fuels)"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 81,
+    "num": 6,
+    "question": "International agreement to limit warming below 2°C?",
+    "options": [
+      "Paris Agreement",
+      "Kyoto Protocol",
+      "Montreal Protocol",
+      "Doha Amendment"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 82,
+    "num": 7,
+    "question": "What is the target for Indian Net-Zero emissions according to Indian Government?",
+    "options": [
+      "2050",
+      "2060",
+      "2030",
+      "2070"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 83,
+    "num": 8,
+    "question": "What is the heat wave?",
+    "options": [
+      "A day with heavy rain",
+      "Prolonged period of unusually high temperatures",
+      "A sudden snowfall",
+      "A type of thunder"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 84,
+    "num": 9,
+    "question": "What is the criteria for heatwaves according to IMD?",
+    "options": [
+      "Humidity only",
+      "Wind speed only",
+      "Air pressure only",
+      "IMD criteria based on temperature thresholds and departure from normal"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 85,
+    "num": 10,
+    "question": "What is the name of the longest continuous graph recording the carbon dioxide concertation?",
+    "options": [
+      "Keeling Curve",
+      "Hockey stick graph",
+      "Arrhenius curve",
+      "Milankovitch curve"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 86,
+    "num": 11,
+    "question": "Which instrument measures depth?",
+    "options": [
+      "Barometer",
+      "Altimeter",
+      "Rain gauge",
+      "Fathometer"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 87,
+    "num": 12,
+    "question": "Which instrument measures rainfall?",
+    "options": [
+      "Rain gauge",
+      "Barometer",
+      "Anemometer",
+      "Thermometer"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 88,
+    "num": 13,
+    "question": "What is moving air called?",
+    "options": [
+      "Wind",
+      "Hail",
+      "None of the above",
+      "Thunder"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 89,
+    "num": 14,
+    "question": "Which layer of the atmosphere do we live in?",
+    "options": [
+      "Stratosphere",
+      "Troposphere",
+      "Mesosphere",
+      "Thermosphere"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 90,
+    "num": 15,
+    "question": "What do we call frozen rain?",
+    "options": [
+      "Hail",
+      "Storm",
+      "Snowfall",
+      "Permafrost"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 91,
+    "num": 16,
+    "question": "Which gas is most abundant in Earth's atmosphere?",
+    "options": [
+      "Oxygen",
+      "Carbon dioxide",
+      "Argon",
+      "Nitrogen"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 92,
+    "num": 17,
+    "question": "Which instrument measures air pressure?",
+    "options": [
+      "Thermometer",
+      "Hygrometer",
+      "Barometer",
+      "Anemometer"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 93,
+    "num": 18,
+    "question": "What do we call a scientist who studies weather?",
+    "options": [
+      "Meteorologist",
+      "Cosmologist",
+      "Ophthalmologist",
+      "Neurologist"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 94,
+    "num": 19,
+    "question": "A large rotating storm over oceans is called?",
+    "options": [
+      "Convection",
+      "Lightning",
+      "Thunderstorm",
+      "Cyclone"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 95,
+    "num": 20,
+    "question": "Formation of clouds happen through which process?",
+    "options": [
+      "Evaporation",
+      "Sublimation",
+      "Condensation",
+      "Melting"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 96,
+    "num": 21,
+    "question": "What instrument measures wind speed?",
+    "options": [
+      "Anemometer",
+      "Wind vane",
+      "Barometer",
+      "Thermometer"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 97,
+    "num": 22,
+    "question": "Morning dew turning into ice is called what?",
+    "options": [
+      "Frost",
+      "Permafrost",
+      "Hail",
+      "None of the above"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 98,
+    "num": 23,
+    "question": "What is partly frozen rain called?",
+    "options": [
+      "Moss",
+      "None of the above",
+      "Sleet",
+      "Hail"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 99,
+    "num": 24,
+    "question": "Average of weather conditions over a long time for an area is called what?",
+    "options": [
+      "Climate",
+      "Averaged weather",
+      "Environment",
+      "Season"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 100,
+    "num": 25,
+    "question": "What scale measures temperature in India?",
+    "options": [
+      "Thermometer",
+      "Barometer",
+      "Hygrometer",
+      "Anemometer"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 101,
+    "num": 26,
+    "question": "When do we celebrate environment day?",
+    "options": [
+      "22 April",
+      "21 March",
+      "2 February",
+      "5 June"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 102,
+    "num": 27,
+    "question": "Process of rising of warm air is called what?",
+    "options": [
+      "Radiation",
+      "Convection",
+      "Conduction",
+      "Subsidence"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 103,
+    "num": 28,
+    "question": "What is the opposite of El Nino?",
+    "options": [
+      "Fi Nino",
+      "La Nina",
+      "Ex Nino",
+      "Mi Nina"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 104,
+    "num": 29,
+    "question": "What is the full form of ENSO?",
+    "options": [
+      "Eastern North Sea Oscillation",
+      "Equatorial Neutral Sea Oscillation",
+      "El Niño Seasonal Oscillation",
+      "El Niño–Southern Oscillation"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 105,
+    "num": 30,
+    "question": "What term describes heat trapped by gases?",
+    "options": [
+      "Blackbox",
+      "Bluebox",
+      "Blackhouse",
+      "Greenhouse"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 106,
+    "num": 31,
+    "question": "Which current flows high in the atmosphere?",
+    "options": [
+      "Ocean gyre",
+      "Trade winds",
+      "Land breeze",
+      "Jet stream"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 107,
+    "num": 32,
+    "question": "Desert wind which blows from Sahara are called?",
+    "options": [
+      "Bora",
+      "Harmattan",
+      "Sirocco",
+      "Foehn"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 108,
+    "num": 33,
+    "question": "Which place in India receives maximum rainfall?",
+    "options": [
+      "Jaisalmer",
+      "Chennai",
+      "Mawsynram",
+      "Leh"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 109,
+    "num": 34,
+    "question": "What forms when warm and cold air meet?",
+    "options": [
+      "Gyre",
+      "Front",
+      "Drought",
+      "Inversion"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 110,
+    "num": 35,
+    "question": "What front forms when cold air advances?",
+    "options": [
+      "Warm front",
+      "Cold front",
+      "Stationary front",
+      "Occluded front"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 111,
+    "num": 36,
+    "question": "What front forms when warm air advances?",
+    "options": [
+      "Cold front",
+      "Stationary front",
+      "Warm front",
+      "Occluded front"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 112,
+    "num": 37,
+    "question": "What type of rainfall occurs due to mountains?",
+    "options": [
+      "Convectional rainfall",
+      "Frontal rainfall",
+      "Orographic rainfall",
+      "Acid rain"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 113,
+    "num": 38,
+    "question": "What rainfall occurs due to heating?",
+    "options": [
+      "Convectional rainfall",
+      "Orographic rainfall",
+      "Frontal rainfall",
+      "Cyclonic rain"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 114,
+    "num": 39,
+    "question": "What rainfall occurs along fronts?",
+    "options": [
+      "Orographic rainfall",
+      "Frontal rainfall",
+      "Convectional rainfall",
+      "Monsoon rain"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 115,
+    "num": 40,
+    "question": "What measure describes moisture content?",
+    "options": [
+      "Humidity",
+      "Dew Content",
+      "AQI",
+      "Moisture Map"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 116,
+    "num": 41,
+    "question": "Heat waves over oceans are called?",
+    "options": [
+      "Cold surge",
+      "Marine heatwave",
+      "Storm tide",
+      "Upwelling"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 117,
+    "num": 42,
+    "question": "Which is the driest place in India?",
+    "options": [
+      "Mawsynram",
+      "Jaisalmer (Thar Desert region)",
+      "Cherrapunji",
+      "Kochi"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 118,
+    "num": 43,
+    "question": "Circular ocean current is called what?",
+    "options": [
+      "Gyre",
+      "Eddy current",
+      "Monsoon",
+      "Tide"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 119,
+    "num": 44,
+    "question": "The amount of solar radiation reaching a given area is called?",
+    "options": [
+      "Insolation",
+      "Albedo",
+      "Radiative forcing",
+      "Humidity"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 120,
+    "num": 45,
+    "question": "What index measures drought severity?",
+    "options": [
+      "Palmer Drought Severity Index (PDSI)",
+      "AQI",
+      "UV index",
+      "Heat index"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 121,
+    "num": 46,
+    "question": "Coldest place in india is?",
+    "options": [
+      "Dras",
+      "Jaisalmer",
+      "Mumbai",
+      "Chennai"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 122,
+    "num": 47,
+    "question": "Which layer of atmosphere burns meteors?",
+    "options": [
+      "Troposphere",
+      "Stratosphere",
+      "Mesosphere",
+      "Thermosphere"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 123,
+    "num": 48,
+    "question": "Which atmospheric layer has auroras?",
+    "options": [
+      "Troposphere",
+      "Stratosphere",
+      "Mesosphere",
+      "Thermosphere"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 124,
+    "num": 49,
+    "question": "Which high-pressure system brings clear skies?",
+    "options": [
+      "Cyclone",
+      "T ornado",
+      "Anticyclone",
+      "Front"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 125,
+    "num": 50,
+    "question": "low-pressure system which brings rain is called?",
+    "options": [
+      "Anticyclone",
+      "Ridge",
+      "Inversion",
+      "Cyclone"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 126,
+    "num": 51,
+    "question": "What is rising moist unstable air called?",
+    "options": [
+      "Subsidence",
+      "Advection",
+      "Inversion",
+      "Convection"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 127,
+    "num": 52,
+    "question": "What is sinking air called?",
+    "options": [
+      "Convection",
+      "Subsidence",
+      "Evaporation",
+      "Upwelling"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 128,
+    "num": 53,
+    "question": "The boundary which separates air masses is called?",
+    "options": [
+      "Isobar",
+      "Thermocline",
+      "Front",
+      "Gyre"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 129,
+    "num": 54,
+    "question": "The zone where the northeast and southeast trade winds converge is called?",
+    "options": [
+      "Intertropical Convergence Zone (ITCZ)",
+      "Polar front",
+      "Jet stream",
+      "Subtropical high"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 130,
+    "num": 55,
+    "question": "Which jet affects India in winter?",
+    "options": [
+      "Polar jet",
+      "Easterly jet",
+      "Subtropical westerly jet",
+      "Low-level jet"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 131,
+    "num": 56,
+    "question": "Which global warming treaty was signed in 2015?",
+    "options": [
+      "Kyoto Protocol",
+      "Montreal Protocol",
+      "Copenhagen Accord",
+      "Paris Agreement"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 132,
+    "num": 57,
+    "question": "What index measures heat stress?",
+    "options": [
+      "Richter scale",
+      "PDSI",
+      "Heat Index",
+      "AQI"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 133,
+    "num": 58,
+    "question": "Which ocean absorbs the most amount of heat?",
+    "options": [
+      "Arctic Ocean",
+      "Southern Ocean",
+      "Pacific Ocean",
+      "Indian Ocean"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 134,
+    "num": 59,
+    "question": "Suspension of fine solid particles or liquid droplets in air is called?",
+    "options": [
+      "Matrix",
+      "Colloid",
+      "Aerosol",
+      "Magma"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 135,
+    "num": 60,
+    "question": "When was IMD established ?",
+    "options": [
+      "1875",
+      "1947",
+      "1905",
+      "1969"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 136,
+    "num": 61,
+    "question": "What is the main difference between weather and climate?",
+    "options": [
+      "Climate changes hourly; weather changes yearly",
+      "Weather is short-term; climate is long-term average patterns",
+      "Weather is long-term; climate is short-term",
+      "They are the same"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 137,
+    "num": 62,
+    "question": "What instrument is used to measure atmospheric pressure?",
+    "options": [
+      "Thermometer",
+      "Hygrometer",
+      "Barometer",
+      "Anemometer"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 138,
+    "num": 63,
+    "question": "Which gas contributes the most to the greenhouse effect naturally?",
+    "options": [
+      "Cooling due to reflection of sunlight",
+      "Warming due to ozone depletion",
+      "Heating only from volcanoes",
+      "Warming due to trapping of outgoing infrared radiation by greenhouse gases"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 139,
+    "num": 64,
+    "question": "What scale is commonly used worldwide to measure temperature?",
+    "options": [
+      "Kelvin",
+      "Fahrenheit",
+      "Rankine",
+      "Celsius"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 140,
+    "num": 65,
+    "question": "What causes day and night?",
+    "options": [
+      "Time Zone",
+      "Season",
+      "Rotation",
+      "Revolution"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 141,
+    "num": 66,
+    "question": "What is the name of the boundary between two air masses?",
+    "options": [
+      "Isobar",
+      "Thermocline",
+      "Front",
+      "Gyre"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 142,
+    "num": 67,
+    "question": "El Niño is primarily associated with which ocean?",
+    "options": [
+      "Arabian",
+      "Pacific",
+      "Antarctic",
+      "Indian"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 143,
+    "num": 68,
+    "question": "What does the term “humidity” measure?",
+    "options": [
+      "Dust",
+      "Pollution",
+      "Heat",
+      "Moisture"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 144,
+    "num": 69,
+    "question": "Which layer of the atmosphere contains most weather phenomena?",
+    "options": [
+      "Mesosphere",
+      "Exosphere",
+      "Stratosphere",
+      "Troposphere"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "numOriginal": 145,
+    "num": 70,
+    "question": "What type of cloud is typically associated with thunderstorms?",
+    "options": [
+      "Cumulonimbus",
+      "Cirrus",
+      "Stratus",
+      "None of the above"
+    ],
+    "answerIndex": 0
+  },
+  {
+    "numOriginal": 146,
+    "num": 71,
+    "question": "What is the primary driver of global atmospheric circulation?",
+    "options": [
+      "Volcanoes",
+      "Earth’s magnetic field",
+      "Uneven solar heating of Earth",
+      "Ocean salinity"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 147,
+    "num": 72,
+    "question": "The Coriolis effect is caused by:",
+    "options": [
+      "Drag due to friction",
+      "Apparent deflection of moving air/objects due to Earth's rotation",
+      "Gravity variation with latitude",
+      "Magnetic field deflection"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 148,
+    "num": 73,
+    "question": "The long-term average of weather conditions in a region is called:",
+    "options": [
+      "Averaged Weather",
+      "None of the above",
+      "Climate",
+      "Season"
+    ],
+    "answerIndex": 2
+  },
+  {
+    "numOriginal": 149,
+    "num": 74,
+    "question": "Which phenomenon involves warming of surface ocean waters in the central and eastern Pacific?",
+    "options": [
+      "La Niña",
+      "El Niño",
+      "IOD",
+      "AMOC"
+    ],
+    "answerIndex": 1
+  },
+  {
+    "numOriginal": 150,
+    "num": 75,
+    "question": "Which of the following is NOT a greenhouse gas?",
+    "options": [
+      "Carbon dioxide (CO₂)",
+      "Methane (CH₄)",
+      "Oxygen (O₂)",
+      "Nitrous oxide (N₂O)"
+    ],
+    "answerIndex": 2
+  }
+]
