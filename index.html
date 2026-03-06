@@ -42,10 +42,7 @@ hr{border:none;border-top:1px solid rgba(148,163,184,.2);margin:18px 0}
 <body>
 <header>
   <div><div class="title">Solo Quiz Live Game (Firebase)</div><div class="small">10s timer • quickest correct answer scores highest • multi-device realtime</div></div>
-  <div>
-    <button class="light" onclick="setMode('host')">Host</button>
-    <button class="light" onclick="setMode('player')">Player</button>
-  </div>
+  <div id="modeControls"></div>
 </header>
 <main><div id="app"></div></main>
 
@@ -155,17 +152,81 @@ if (cfgReady) {
   db = getFirestore(app);
 }
 
+const HOST_PASSWORD = 'ZUIQCAOS';
 const userId = localStorage.userId || (localStorage.userId = 'u' + Math.random().toString(36).slice(2));
-let mode = new URL(location).searchParams.get('mode') || 'host';
-let gamePin = new URL(location).searchParams.get('pin') || '';
+const url = new URL(location);
+const requestedMode = url.searchParams.get('mode') || 'player';
+const hostKeyFromUrl = url.searchParams.get('hk') || '';
+let mode = requestedMode === 'host' ? 'host' : 'player';
+let gamePin = url.searchParams.get('pin') || '';
 let state = null;
 let unsub = null;
+let hostAccess = false;
+let hostKey = hostKeyFromUrl;
 
-function setMode(m){ mode=m; syncUrl(); attachListener(); render(); }
-function syncUrl(){ const u=new URL(location); u.searchParams.set('mode',mode); if(gamePin)u.searchParams.set('pin',gamePin); history.replaceState(null,'',u); }
+function hostStorageKey(pin){ return `hostKey_${pin}`; }
+function makeHostKey(){ return Math.random().toString(36).slice(2,12).toUpperCase(); }
+function refreshModeControls(){
+  const el = document.getElementById('modeControls');
+  if(!el) return;
+  el.innerHTML = hostAccess
+    ? `<button class="light" onclick="setMode('host')">Host</button><button class="light" onclick="setMode('player')">Player</button>`
+    : `<button class="light" onclick="hostLogin()">Host Login</button><button class="light" onclick="setMode('player')">Player</button>`;
+}
+function setMode(m){
+  if(m==='host' && !hostAccess){
+    hostLogin();
+    return;
+  }
+  mode=m;
+  syncUrl();
+  attachListener();
+  render();
+}
+function syncUrl(){
+  const u=new URL(location);
+  u.searchParams.set('mode', hostAccess && mode==='host' ? 'host' : 'player');
+  if(gamePin) u.searchParams.set('pin',gamePin); else u.searchParams.delete('pin');
+  if(hostAccess && gamePin && hostKey) u.searchParams.set('hk', hostKey); else u.searchParams.delete('hk');
+  history.replaceState(null,'',u);
+}
 function makePin(){ return String(Math.floor(100000 + Math.random()*900000)); }
-function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); return u.toString(); }
+function joinLink(pin){ const u=new URL(location); u.searchParams.set('mode','player'); u.searchParams.set('pin',pin); u.searchParams.delete('hk'); return u.toString(); }
 function qr(pin){ return 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(joinLink(pin)); }
+
+
+async function hostLogin(){
+  const password = prompt('Enter host password');
+  if(password !== HOST_PASSWORD){
+    if(password !== null) alert('Invalid host password.');
+    return;
+  }
+  if(!gamePin){
+    mode = 'host';
+    hostAccess = true;
+    syncUrl();
+    render();
+    return;
+  }
+  const loaded = await loadState();
+  if(!loaded){
+    alert('Game not found for this PIN.');
+    return;
+  }
+  hostKey = loaded.hostKey || makeHostKey();
+  if(!loaded.hostKey){
+    loaded.hostKey = hostKey;
+    state = loaded;
+    await saveState();
+  }
+  hostAccess = true;
+  localStorage.setItem(hostStorageKey(gamePin), hostKey);
+  mode = 'host';
+  syncUrl();
+  attachListener();
+  state = loaded;
+  render();
+}
 
 async function loadState(){
   if(!cfgReady || !db || !gamePin) return null;
@@ -193,8 +254,12 @@ function attachListener(){
 
 async function createGame(){
   gamePin = makePin();
+  hostAccess = true;
+  hostKey = makeHostKey();
+  localStorage.setItem(hostStorageKey(gamePin), hostKey);
   state = {
     pin: gamePin,
+    hostKey,
     title: 'Solo Quiz',
     status: 'lobby',
     current: 0,
@@ -366,19 +431,39 @@ async function joinGame(){
   await addPlayer(name);
 }
 function render(){
+  refreshModeControls();
   document.getElementById('app').innerHTML = `
   <div class="grid">
     <div>${mode==='host' ? hostView() : playerView()}</div>
     <div>${scoreboard()}</div>
   </div>`;
 }
-syncUrl();
-attachListener();
-if(gamePin && cfgReady){
-  loadState().then(s => { state = s; render(); });
-} else {
+async function init(){
+  if(gamePin){
+    const storedHostKey = localStorage.getItem(hostStorageKey(gamePin)) || '';
+    if(hostKeyFromUrl && hostKeyFromUrl===storedHostKey){
+      hostAccess = true;
+      hostKey = hostKeyFromUrl;
+    }
+  }
+  syncUrl();
+  attachListener();
+  if(gamePin && cfgReady){
+    state = await loadState();
+    if(state && (hostKey === state.hostKey || localStorage.getItem(hostStorageKey(gamePin))===state.hostKey)){
+      hostAccess = true;
+      hostKey = state.hostKey;
+      localStorage.setItem(hostStorageKey(gamePin), hostKey);
+    }
+  }
+  if(mode==='host' && !hostAccess){
+    mode='player';
+  }
+  syncUrl();
   render();
 }
+init();
+window.hostLogin=hostLogin;
 window.setMode=setMode;
 window.createGame=createGame;
 window.startGame=startGame;
