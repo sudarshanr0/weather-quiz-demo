@@ -54,7 +54,7 @@ hr{border:none;border-top:1px solid rgba(148,163,184,.2);margin:18px 0}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js';
-import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js';
+import { getFirestore, doc, setDoc, getDoc, onSnapshot, runTransaction } from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBI-kJfFpBluI-4f8wqOcrgvQPVKGgWi3U",
@@ -123,15 +123,20 @@ function qr(pin) {
 }
 
 async function loadState() {
-  if (!cfgReady || !db || !gamePin) return null;
-  const ref = doc(db, 'quizGames', gamePin);
+  const ref = gameRef();
+  if (!ref) return null;
   const snap = await getDoc(ref);
   return snap.exists() ? snap.data() : null;
 }
 
+function gameRef() {
+  if (!cfgReady || !db || !gamePin) return null;
+  return doc(db, 'quizGames', gamePin);
+}
+
 async function saveState() {
-  if (!cfgReady || !db || !gamePin) return;
-  const ref = doc(db, 'quizGames', gamePin);
+  const ref = gameRef();
+  if (!ref) return;
   await setDoc(ref, state, { merge: true });
 }
 
@@ -214,12 +219,18 @@ async function nextQuestion() {
 }
 
 async function addPlayer(name) {
-  if (!state) return;
+  const ref = gameRef();
+  if (!ref) return;
   if (!name) name = 'Player';
-  state.players = state.players || {};
-  state.players[userId] = state.players[userId] || { name, score: 0 };
-  state.players[userId].name = name;
-  await saveState();
+  await runTransaction(db, async (tx) => {
+    const snap = await tx.get(ref);
+    if (!snap.exists()) return;
+    const next = snap.data();
+    next.players = next.players || {};
+    next.players[userId] = next.players[userId] || { name, score: 0 };
+    next.players[userId].name = name;
+    tx.set(ref, { players: next.players }, { merge: true });
+  });
 }
 
 function remainingMs() {
@@ -228,20 +239,30 @@ function remainingMs() {
 }
 
 async function answerQuestion(idx) {
-  if (!state || state.status !== 'live') return;
-  state.answered = state.answered || {};
-  if (state.answered[userId]) return;
-  const q = QUESTIONS[state.current];
-  const elapsed = Date.now() - state.questionStart;
-  const correct = idx === q.answerIndex;
-  let points = 0;
-  if (correct && elapsed <= 15000) points = Math.max(100, Math.round(1000 - elapsed / 10));
+  const ref = gameRef();
+  if (!ref) return;
+  await runTransaction(db, async (tx) => {
+    const snap = await tx.get(ref);
+    if (!snap.exists()) return;
+    const next = snap.data();
+    if (next.status !== 'live') return;
 
-  state.players = state.players || {};
-  state.players[userId] = state.players[userId] || { name: 'Player', score: 0 };
-  state.players[userId].score += points;
-  state.answered[userId] = { idx, elapsed, correct, points };
-  await saveState();
+    next.answered = next.answered || {};
+    if (next.answered[userId]) return;
+
+    const q = QUESTIONS[next.current];
+    const elapsed = Date.now() - next.questionStart;
+    const correct = idx === q.answerIndex;
+    let points = 0;
+    if (correct && elapsed <= 15000) points = Math.max(100, Math.round(1000 - elapsed / 10));
+
+    next.players = next.players || {};
+    next.players[userId] = next.players[userId] || { name: 'Player', score: 0 };
+    next.players[userId].score += points;
+    next.answered[userId] = { idx, elapsed, correct, points };
+
+    tx.set(ref, { players: next.players, answered: next.answered }, { merge: true });
+  });
 }
 
 function updateLiveTimers() {
